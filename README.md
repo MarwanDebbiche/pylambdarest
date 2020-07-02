@@ -131,4 +131,5 @@ You can look at the [sample](./sample) to have a working example of this set-up.
 
 - Add tests
 - CI/CD
+- Documentation
 - ?
