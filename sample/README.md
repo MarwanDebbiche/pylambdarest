@@ -7,5 +7,11 @@ The [serverless.yaml](./serverless.yaml) defines the API Gateway routing.
 You can deploy the API using serverless:
 
 ```
-serverless deploy
+serverless deploy --stage development
+```
+
+And you can test the API locally using [serverless-offline](https://github.com/dherault/serverless-offline):
+
+```
+serverless offline
 ```

@@ -6,3 +6,11 @@ user_schema = {
     "required": ["name"],
     "additionalProperties": False
 }
+
+get_users_query_params_schema = {
+    "type": ["object", "null"],
+    "properties": {
+        "page": {"type": "string"}
+    },
+    "additionalProperties": False
+}

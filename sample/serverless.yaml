@@ -8,15 +8,19 @@ functions:
   hello:
     handler: handler.hello
     events:
-      - http: GET hello
+      - http: GET /hello
   createUser:
     handler: handler.create_user
     events:
-      - http: POST users
+      - http: POST /users
   getUser:
     handler: handler.get_user
     events:
       - http: GET /users/{user_id}
+  getUsers:
+    handler: handler.get_users
+    events:
+      - http: GET /users
 
 package:
   exclude:
@@ -24,7 +28,7 @@ package:
 
 plugins:
   - serverless-python-requirements
-
+  - serverless-offline
 custom:
   stage: ${opt:stage, self:provider.stage}
   region: ${env:AWS_REGION, self:provider.region}

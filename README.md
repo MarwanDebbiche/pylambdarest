@@ -75,7 +75,31 @@ def create_user(request):
     # a 400 will be returned
 
     # Create user here
-    return 201, {}
+
+    return 201
+
+
+query_params_schema = {
+    "type": "object",
+    "properties": {
+        # Only string types are allowed for query parameters.
+        # Types casting should be done in the handler.
+        "page": {"type": "string"} 
+    },
+    "additionalProperties": False
+}
+
+@route(query_params_schema=query_params_schema)
+def get_users(request):
+    page = int(request.query_params.get("page", 1))
+
+    # request users in db
+    users = [
+        {"userId": i}
+        for i in range((page - 1) * 50, page * 50)
+    ]
+
+    return 200, users
 ```
 
 ## Motivation
@@ -84,12 +108,27 @@ Why another framework ?
 
 Two reasons:
 
-- When using API Gateway + python lambdas, the pattern I often see is one unique lambda triggered by a **proxy API Gateway resource**. The lambda then uses Flask to do all the routing. In an API Gateway + Lambda context, I feel like the routing should be handled by API Gateway itself, then forwarding the request to specific lambda functions for each resource or endoint.
+- When using API Gateway and python Lambdas, the pattern I often see is to have one unique lambda triggered by a **proxy** API Gateway resource. The lambda then uses Flask to do all the routing. In an API Gateway + Lambda context, I feel like the routing should be handled by API Gateway itself, then forwarding the request to specific lambda functions for each resource or endoint.
 - The other reason is just fun.
 
 *N.B: I find it useful to declare the API Gateway -> Lambda routing using the amazing [serverless](https://www.serverless.com/) framework*
 
+## Installation
+
+You can install this package using pip:
+
+```
+pip install pylambdarest
+```
+
+It should also be included in the deployment package of your lambda. This can be done easily using the serverless plugin [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements).
+
+To speed-up your API development, I also recommend using the [serverless-offline](https://github.com/dherault/serverless-offline) package.
+
+You can look at the [sample](./sample) to have a working example of this set-up.
+
 ## Next steps:
 
-- Implement response validation
 - Add tests
+- CI/CD
+- ?

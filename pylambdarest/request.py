@@ -18,11 +18,11 @@ class Request:
 
     @property
     def path_params(self):
-        return self.event["pathParameters"]
+        return self._get_event_key("pathParameters")
 
     @property
     def query_params(self):
-        return self.event["queryStringParameters"]
+        return self._get_event_key("queryStringParameters")
 
     @property
     def method(self):
@@ -31,3 +31,10 @@ class Request:
     @property
     def headers(self):
         return self.event["headers"]
+
+    def _get_event_key(self, key, none_as_empty=True):
+        value = self.event.get(key)
+        if value is None and none_as_empty:
+            return {}
+
+        return value
