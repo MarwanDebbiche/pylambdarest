@@ -1,4 +1,4 @@
-# Example project
+# Sample project
 
 This sample projects demonstrate how you can use pylambdarest with [serverless](https://serverless.com/) to build your own REST API.
 
