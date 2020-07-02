@@ -2,8 +2,8 @@ from inspect import getargspec
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError, SchemaError
 
-from request import Request
-from response import Response
+from pylambdarest.request import Request
+from pylambdarest.response import Response
 
 
 class route:
@@ -47,7 +47,3 @@ class route:
                 return Response(500, str(e)).format()
 
         return inner_func
-
-
-if __name__ == "__main__":
-    route = route(lambda a, b : a+b)
