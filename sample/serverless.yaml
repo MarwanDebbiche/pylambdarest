@@ -1,0 +1,31 @@
+service: pylambdarest-sample
+provider:
+  name: aws
+  runtime: python3.8
+  region: eu-west-3
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http: GET hello
+  createUser:
+    handler: handler.create_user
+    events:
+      - http: POST users
+  getUser:
+    handler: handler.get_user
+    events:
+      - http: GET /users/{user_id}
+
+package:
+  exclude:
+    - "./node_modules/**"
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  region: ${env:AWS_REGION, self:provider.region}
+
