@@ -22,24 +22,17 @@ class route:
 
         def inner_func(event, context):
             try:
-                for arg in function_args:
-                    if arg not in self._ROUTE_ARGS:
-                        raise ValueError(f"Unexpected route argument {arg}")
-
                 func_args_values = {}
                 request = Request(event)
-
                 self.validate_request(request)
 
-                if self.body_schema is not None:
-                    validate(request.json, self.body_schema)
-
-                if 'event' in function_args:
-                    func_args_values['event'] = event
-                if 'context' in function_args:
-                    func_args_values['context'] = context
-                if 'request' in function_args:
-                    func_args_values["request"] = request
+                for arg in function_args:
+                    if arg in request.path_params:
+                        func_args_values[arg] = request.path_params.get(arg)
+                    elif arg not in self._ROUTE_ARGS:
+                        raise ValueError(f"Unexpected route argument {arg}")
+                    else:
+                        func_args_values[arg] = eval(arg)
 
                 res = function(**func_args_values)
                 if not isinstance(res, tuple):

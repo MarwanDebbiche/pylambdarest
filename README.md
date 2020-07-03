@@ -39,7 +39,24 @@ def handler(request):
     return 200, {"message": f"Hello from AWS Lambda {body['name']}!!"}
 ```
 
-You can still access the original `event`, `context` argument from the handler:
+Path parameters defined in API Gateway can also be accessed directly as function argument.
+
+![api-gateway-path-params](images/api-gateway-path-params.png)
+
+```python
+from pylambdarest import route
+
+@route()
+def get_user(request, user_id):
+    print(user_id)
+
+    # get user from db
+    user = {"id": user_id, "name": "John Doe"}
+
+    return 200, user
+```
+
+And you can still access the original `event` and `context` arguments from the handler:
 
 ```python
 from pylambdarest import route
@@ -53,6 +70,7 @@ def handler(request, event, context):
 
     return 200, {"message": f"Hello from AWS Lambda {body['name']}!!"}
 ```
+## Schema Validation
 
 pylambdarest also provides basic schema validation using [jsonschema](https://github.com/Julian/jsonschema):
 
@@ -125,11 +143,12 @@ It should also be included in the deployment package of your lambda. This can be
 
 To speed-up your API development, I also recommend using the [serverless-offline](https://github.com/dherault/serverless-offline) package.
 
-You can look at the [sample](./sample) to have a working example of this set-up.
+You can look at the [sample](https://github.com/MarwanDebbiche/pylambdarest/tree/master/sample) to have a working example of this set-up.
 
 ## Next steps:
 
 - Add tests
 - CI/CD
 - Documentation
+- Python 3.6 and 3.7 compatibility
 - ?
