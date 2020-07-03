@@ -4,7 +4,7 @@ pylambdarest is a lightweight framework for building REST API using AWS Lambda +
 
 Unlike most of other Python frameworks, it does not provide any routing capability. The routing should be handled by API Gateway itself.
 
-Basically, it just provide a `@route` decorator to parse the API Gateway event into a `Request` object accessible from the handler function as an argument. It also formats the handler's output to the expected lambda + API Gateway format seamlessly.
+Basically, it provides a `@route` decorator to parse the API Gateway event into a `Request` object accessible from the handler function as an argument. It also formats the handler's output to the expected lambda + API Gateway format seamlessly.
 
 Turning this:
 
