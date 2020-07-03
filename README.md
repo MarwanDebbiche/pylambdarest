@@ -39,6 +39,22 @@ def handler(request):
     return 200, {"message": f"Hello from AWS Lambda {body['name']}!!"}
 ```
 
+
+And you can still access the original `event` and `context` arguments from the handler:
+
+```python
+from pylambdarest import route
+
+@route()
+def handler(request, event, context):
+    print(event)
+    print(context)
+    body = request.json
+    params = request.params
+
+    return 200, {"message": f"Hello from AWS Lambda {body['name']}!!"}
+```
+
 Path parameters defined in API Gateway can also be accessed directly as function argument.
 
 ![api-gateway-path-params](images/api-gateway-path-params.png)
@@ -56,20 +72,6 @@ def get_user(request, user_id):
     return 200, user
 ```
 
-And you can still access the original `event` and `context` arguments from the handler:
-
-```python
-from pylambdarest import route
-
-@route()
-def handler(request, event, context):
-    print(event)
-    print(context)
-    body = request.json
-    params = request.params
-
-    return 200, {"message": f"Hello from AWS Lambda {body['name']}!!"}
-```
 ## Schema Validation
 
 pylambdarest also provides basic schema validation using [jsonschema](https://github.com/Julian/jsonschema):
