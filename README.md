@@ -63,7 +63,7 @@ Path parameters defined in API Gateway can also be accessed directly as function
 from pylambdarest import route
 
 @route()
-def get_user(request, user_id):
+def get_user(user_id):
     print(user_id)
 
     # get user from db
