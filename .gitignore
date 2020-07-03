@@ -131,3 +131,4 @@ dmypy.json
 .vscode
 secrets.txt
 .serverless
+test-api

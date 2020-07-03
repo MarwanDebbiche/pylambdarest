@@ -11,9 +11,7 @@ def hello():
 
 
 @route()
-def get_user(request):
-    user_id = request.path_params.get("user_id")
-
+def get_user(user_id):
     # request db data for user <user_id> here
     user = {
         "userId": user_id,
