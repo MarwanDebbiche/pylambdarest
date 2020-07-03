@@ -57,7 +57,7 @@ def handler(request, event, context):
 
 Path parameters defined in API Gateway can also be accessed directly as function argument.
 
-![api-gateway-path-params](images/api-gateway-path-params.png)
+![api-gateway-path-params](https://raw.githubusercontent.com/MarwanDebbiche/pylambdarest/master/images/api-gateway-path-params.png)
 
 ```python
 from pylambdarest import route
