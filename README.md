@@ -143,14 +143,14 @@ pip install pylambdarest
 
 It should also be included in the deployment package of your lambda. This can be done easily using the serverless plugin [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements).
 
-To speed-up your API development, I also recommend using the [serverless-offline](https://github.com/dherault/serverless-offline) package.
+To speed-up your API development, I also recommend using the [serverless-offline](https://github.com/dherault/serverless-offline) plugin.
 
 You can look at the [sample](https://github.com/MarwanDebbiche/pylambdarest/tree/master/sample) to have a working example of this set-up.
 
 ## Next steps:
 
+- Documentation
 - Add tests
 - CI/CD
-- Documentation
 - Python 3.6 and 3.7 compatibility
 - ?
