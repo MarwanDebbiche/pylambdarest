@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="pylambdarest",
-    version="0.0.6rc1",
+    version="0.0.6",
     author="Marwan Debbiche",
     author_email="marwan.debbiche@gmail.com",
     description="REST framework for serverless API (AWS Lambda + API Gateway)",
