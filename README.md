@@ -40,7 +40,7 @@ def handler(request):
 ```
 
 
-And you can still access the original `event` and `context` arguments from the handler:
+You can still access the original `event` and `context` arguments from the handler:
 
 ```python
 from pylambdarest import route
@@ -55,7 +55,11 @@ def handler(request, event, context):
     return 200, {"message": f"Hello from AWS Lambda {body['name']}!!"}
 ```
 
-Path parameters defined in API Gateway can also be accessed directly as function argument.
+<br/>
+
+Path parameters defined in API Gateway can also be accessed directly as function argument:
+
+<br/>
 
 ![api-gateway-path-params](https://raw.githubusercontent.com/MarwanDebbiche/pylambdarest/master/images/api-gateway-path-params.png)
 
@@ -126,16 +130,13 @@ def get_users(request):
 
 Why another framework ?
 
-Two reasons:
-
-- When using API Gateway and python Lambdas, the pattern I often see is to have one unique lambda triggered by a **proxy** API Gateway resource. The lambda then uses Flask to do all the routing. In an API Gateway + Lambda context, I feel like the routing should be handled by API Gateway itself, then forwarding the request to specific lambda functions for each resource or endoint.
-- The other reason is just fun.
+When using API Gateway and python Lambdas, the most common pattern is to have one unique lambda triggered by a **proxy** API Gateway resource. The lambda then uses a framework like Flask to do all the routing. In an API Gateway + Lambda context, I feel like the routing should be handled by API Gateway itself, then forwarding the request to specific lambda functions for each resource or endoint.
 
 *N.B: I find it useful to declare the API Gateway -> Lambda routing using the amazing [serverless](https://www.serverless.com/) framework*
 
 ## Installation
 
-You can install this package using pip:
+You can install pylambdarest using pip:
 
 ```
 pip install pylambdarest
@@ -149,8 +150,6 @@ You can look at the [sample](https://github.com/MarwanDebbiche/pylambdarest/tree
 
 ## Next steps:
 
-- Documentation
 - Add tests
-- CI/CD
-- Python 3.6 and 3.7 compatibility
+- Test Older Python versions compatibility
 - ?
