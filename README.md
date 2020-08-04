@@ -132,7 +132,7 @@ Why another framework ?
 
 When using API Gateway and python Lambdas, the most common pattern is to have one unique lambda triggered by a **proxy** API Gateway resource. The lambda then uses a framework like Flask to do all the routing. In an API Gateway + Lambda context, I feel like the routing should be handled by API Gateway itself, then forwarding the request to specific lambda functions for each resource or endoint.
 
-*N.B: I find it useful to declare the API Gateway -> Lambda routing using the amazing [serverless](https://www.serverless.com/) framework*
+N.B: I find it useful to declare the API Gateway -> Lambda routing using the amazing [serverless](https://www.serverless.com/) framework
 
 ## Installation
 
