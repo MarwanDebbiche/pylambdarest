@@ -4,7 +4,7 @@ pylambdarest is a lightweight framework for building REST API using AWS Lambda +
 
 Unlike most of other Python frameworks, it does not provide any routing capability. The routing should be handled by API Gateway itself.
 
-Basically, it provides a `@route` decorator to parse the API Gateway event into a `Request` object accessible from the handler function as an argument. It also formats the handler's output to the expected lambda + API Gateway format seamlessly.
+Basically, it provides a `@route` decorator to parse the API Gateway event into a `Request` object accessible from the handler function as an argument. It also formats the handler's output to the expected Lambda + API Gateway format seamlessly.
 
 Turning this:
 
@@ -130,7 +130,7 @@ def get_users(request):
 
 Why another framework ?
 
-When using API Gateway and python Lambdas, the most common pattern is to have one unique lambda triggered by a **proxy** API Gateway resource. The lambda then uses a framework like Flask to do all the routing. In an API Gateway + Lambda context, I feel like the routing should be handled by API Gateway itself, then forwarding the request to specific lambda functions for each resource or endoint.
+When using API Gateway and python Lambdas, the most common pattern is to have one unique Lambda triggered by a **proxy** API Gateway resource. The Lambda then uses a framework like Flask to do all the routing. In an API Gateway + Lambda context, I feel like the routing should be handled by API Gateway itself, then forwarding the request to specific Lambda functions for each resource or endoint.
 
 N.B: I find it useful to declare the API Gateway -> Lambda routing using the amazing [serverless](https://www.serverless.com/) framework
 
@@ -142,7 +142,7 @@ You can install pylambdarest using pip:
 pip install pylambdarest
 ```
 
-It should also be included in the deployment package of your lambda. This can be done easily using the serverless plugin [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements).
+pylambdarest should also be included in the deployment package of your Lambdas. If you use the serverless framework to manage your deployment, this can be done easily using the [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements) plugin.
 
 To speed-up your API development, I also recommend using the [serverless-offline](https://github.com/dherault/serverless-offline) plugin.
 
@@ -151,5 +151,5 @@ You can look at the [sample](https://github.com/MarwanDebbiche/pylambdarest/tree
 ## Next steps:
 
 - Add tests
-- Test Older Python versions compatibility
+- Test older Python versions compatibility
 - ?

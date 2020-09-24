@@ -2,8 +2,13 @@
   "name": "pylambdarest-sample",
   "version": "1.0.0",
   "description": "pylambdarest-sample",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarwanDebbiche/pylambdarest.git"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy:dev": "serverless deploy --stage dev --verbose"
   },
   "author": "Marwan Debbiche",
   "devDependencies": {
