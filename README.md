@@ -50,7 +50,6 @@ def handler(request, event, context):
     print(event)
     print(context)
     body = request.json
-    params = request.params
 
     return 200, {"message": f"Hello from AWS Lambda {body['name']}!!"}
 ```
@@ -130,7 +129,7 @@ def get_users(request):
 
 Why another framework ?
 
-When using API Gateway and python Lambdas, the most common pattern is to have one unique Lambda triggered by a **proxy** API Gateway resource. The Lambda then uses a framework like Flask to do all the routing. In an API Gateway + Lambda context, I feel like the routing should be handled by API Gateway itself, then forwarding the request to specific Lambda functions for each resource or endoint.
+When using API Gateway and python Lambdas, the most common pattern is to have one unique Lambda triggered by a proxy API Gateway resource. The Lambda then uses a framework like Flask to do all the routing. In an API Gateway + Lambda context, I feel like **the routing should be handled by API Gateway itself**, then forwarding the request to specific Lambda functions for each resource or endoint.
 
 N.B: I find it useful to declare the API Gateway -> Lambda routing using the amazing [serverless](https://www.serverless.com/) framework
 

@@ -29,7 +29,7 @@ jobs:
       - name: Pytest
         run: poetry run pytest
 
-  deploy:
+  publish:
     if: github.event_name == 'release' && github.event.action == 'created'
     runs-on: ubuntu-latest
     steps:
@@ -43,6 +43,6 @@ jobs:
           poetry-version: 1.0.10
       - name: Build and publish
         env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-        run: poetry publish -u $TWINE_USERNAME -p $TWINE_PASSWORD --build
+          PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: poetry publish -u $PYPI_USERNAME -p $PYPI_PASSWORD --build
