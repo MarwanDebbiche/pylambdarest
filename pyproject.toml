@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "pylambdarest"
+version = "0.0.8"
+license = "MIT"
+description = "Lightweight framework for building REST API using AWS Lambda + API Gateway"
+authors = ["Marwan Debbiche (Macbook Pro) <marwan.debbiche@gmail.com>"]
+homepage = "https://github.com/MarwanDebbiche/pylambdarest"
+repository = "https://github.com/MarwanDebbiche/pylambdarest"
+documentation = "https://pylambdarest.readthedocs.io"
+readme = "README.md"
+keywords = ["aws-lambda", "serverless", "api-gateway", "rest-api"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+jsonschema = "^3.2.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.0.2"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

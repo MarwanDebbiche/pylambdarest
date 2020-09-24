@@ -29,7 +29,7 @@ package:
 plugins:
   - serverless-python-requirements
   - serverless-offline
+
 custom:
   stage: ${opt:stage, self:provider.stage}
   region: ${env:AWS_REGION, self:provider.region}
-
