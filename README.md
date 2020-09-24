@@ -147,9 +147,3 @@ pylambdarest should also be included in the deployment package of your Lambdas. 
 To speed-up your API development, I also recommend using the [serverless-offline](https://github.com/dherault/serverless-offline) plugin.
 
 You can look at the [sample](https://github.com/MarwanDebbiche/pylambdarest/tree/master/sample) to have a working example of this set-up.
-
-## Next steps:
-
-- Add tests
-- Test older Python versions compatibility
-- ?

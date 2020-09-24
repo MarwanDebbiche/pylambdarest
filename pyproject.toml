@@ -16,7 +16,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.6"
 jsonschema = "^3.2.0"
 
 [tool.poetry.dev-dependencies]

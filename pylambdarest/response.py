@@ -5,7 +5,7 @@ class Response:
     def __init__(self, code, body=None, headers=None):
         self.code = code
         self.body = body
-        self.headers = None
+        self.headers = headers
 
     def format(self):
         """
