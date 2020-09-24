@@ -36,8 +36,8 @@ description = ""
 develop = true
 name = "pylambdarest"
 optional = false
-python-versions = "^3.8"
-version = "0.0.8"
+python-versions = "^3.6"
+version = "0.0.9"
 
 [package.dependencies]
 jsonschema = "^3.2.0"
