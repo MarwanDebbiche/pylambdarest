@@ -3,6 +3,8 @@ import json
 
 class Request:
     def __init__(self, event):
+        if type(event) != dict:
+            raise ValueError(f"Invalid event. {event} is not of type dict")
         self.event = event
 
     @property

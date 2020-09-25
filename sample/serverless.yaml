@@ -33,4 +33,4 @@ plugins:
 custom:
   pythonRequirements:
     slim: true
-    usePoetry: true
+    usePoetry: false

@@ -1,4 +1,4 @@
-from inspect import getargspec
+from inspect import getfullargspec
 import traceback
 
 from jsonschema import validate
@@ -18,7 +18,7 @@ class route:
         self.query_params_schema = query_params_schema
 
     def __call__(self, function, *args, **kwargs):
-        function_args = getargspec(function).args
+        function_args = getfullargspec(function).args
 
         def inner_func(event, context):
             try:
@@ -42,14 +42,6 @@ class route:
 
             except ValidationError as e:
                 return Response(400, str(e).split("\n")[0]).format()
-            except SchemaError as e:
-                print("SchemaError:", e)
-                traceback.print_exc()
-                return Response(500).format()
-            except Exception as e:
-                print("Error:", e)
-                traceback.print_exc()
-                return Response(500).format()
 
         return inner_func
 

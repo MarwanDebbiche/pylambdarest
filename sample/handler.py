@@ -7,7 +7,7 @@ from schemas import (
 
 @route()
 def hello():
-    return 200, {"messsage": "Hello from pylambdarest !!!"}
+    return 200, {"message": "Hello from pylambdarest !!!"}
 
 
 @route()
@@ -21,7 +21,7 @@ def get_user(user_id):
     return 200, user
 
 
-@route(body_schema=user_schema, )
+@route(body_schema=user_schema)
 def create_user(request, event):
 
     # Create user here
