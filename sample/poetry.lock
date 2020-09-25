@@ -32,20 +32,14 @@ format_nongpl = ["idna", "jsonpointer (>1.13)", "webcolors", "rfc3986-validator 
 
 [[package]]
 category = "main"
-description = ""
-develop = true
+description = "Lightweight framework for building REST API using AWS Lambda + API Gateway"
 name = "pylambdarest"
 optional = false
-python-versions = "^3.6"
+python-versions = ">=3.6,<4.0"
 version = "0.0.9"
 
 [package.dependencies]
-jsonschema = "^3.2.0"
-
-[package.source]
-reference = ""
-type = "directory"
-url = ".."
+jsonschema = ">=3.2.0,<4.0.0"
 
 [[package]]
 category = "main"
@@ -64,7 +58,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "1.15.0"
 
 [metadata]
-content-hash = "e9cfc99c13a40784ab9d5c9b172c964aa12309aee8779bb34fde164afb7b3ced"
+content-hash = "ead72a0c2a780021927bafa9290b34c2c9051fbe30cd8b290cf93ca018d621be"
 lock-version = "1.0"
 python-versions = "^3.8"
 
@@ -77,7 +71,10 @@ jsonschema = [
     {file = "jsonschema-3.2.0-py2.py3-none-any.whl", hash = "sha256:4e5b3cf8216f577bee9ce139cbe72eca3ea4f292ec60928ff24758ce626cd163"},
     {file = "jsonschema-3.2.0.tar.gz", hash = "sha256:c8a85b28d377cc7737e46e2d9f2b4f44ee3c0e1deac6bf46ddefc7187d30797a"},
 ]
-pylambdarest = []
+pylambdarest = [
+    {file = "pylambdarest-0.0.9-py3-none-any.whl", hash = "sha256:05b0bbbf89c8dcd66fd13ea9da9cb33be2fd6095a99429dbcfb6cf916c79a441"},
+    {file = "pylambdarest-0.0.9.tar.gz", hash = "sha256:4e98965805d95e01f30486cf170dd7550193c022f120d1b5b65b505575c8c41f"},
+]
 pyrsistent = [
     {file = "pyrsistent-0.17.3.tar.gz", hash = "sha256:2e636185d9eb976a18a8a8e96efce62f2905fea90041958d8cc2a189756ebf3e"},
 ]

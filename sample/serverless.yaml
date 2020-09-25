@@ -31,5 +31,6 @@ plugins:
   - serverless-offline
 
 custom:
-  stage: ${opt:stage, self:provider.stage}
-  region: ${env:AWS_REGION, self:provider.region}
+  pythonRequirements:
+    slim: true
+    usePoetry: true

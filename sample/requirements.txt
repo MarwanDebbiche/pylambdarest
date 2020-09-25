@@ -1,1 +1,1 @@
-pylambdarest
+pylambdarest==0.0.9
