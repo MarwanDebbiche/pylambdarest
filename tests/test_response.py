@@ -5,9 +5,9 @@ from pylambdarest import Response
 
 def response():
     return {
-        'code': 200,
-        'body': {"test": "pass"},
-        'headers': {'test-forwarded-for': 'user'},
+        "code": 200,
+        "body": {"test": "pass"},
+        "headers": {"test-forwarded-for": "user"},
     }
 
 
@@ -16,11 +16,18 @@ def example_response():
     return Response(**response())
 
 
+def test_invalid_arguments():
+    with pytest.raises(TypeError):
+        Response("invalid_status_code")
+    with pytest.raises(TypeError):
+        Response(200, None, "invalid_headers")
+
+
 def test_response_is_correctly_formated(example_response):
     expected_response = {
         "statusCode": 200,
         "body": '{"test": "pass"}',
-        "headers": {'test-forwarded-for': 'user'},
+        "headers": {"test-forwarded-for": "user"},
     }
     assert example_response.format() == expected_response
 
