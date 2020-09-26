@@ -1,4 +1,5 @@
 from inspect import getfullargspec
+from typing import Optional
 
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError
@@ -8,11 +9,13 @@ from pylambdarest.response import Response
 
 
 class route:
-    _ROUTE_ARGS = [
-        "event", "context", "request"
-    ]
+    _ROUTE_ARGS = ["event", "context", "request"]
 
-    def __init__(self, body_schema=None, query_params_schema=None):
+    def __init__(
+        self,
+        body_schema: Optional[dict] = None,
+        query_params_schema: Optional[dict] = None,
+    ):
         self.body_schema = body_schema
         self.query_params_schema = query_params_schema
 
@@ -35,7 +38,7 @@ class route:
 
                 res = function(**func_args_values)
                 if not isinstance(res, tuple):
-                    res = (res, )
+                    res = (res,)
 
                 return Response(*res).format()
 
@@ -44,7 +47,7 @@ class route:
 
         return inner_func
 
-    def validate_request(self, request):
+    def validate_request(self, request: Request) -> None:
         if self.body_schema is not None:
             validate(request.json, self.body_schema)
 

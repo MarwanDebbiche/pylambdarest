@@ -93,7 +93,7 @@ user_schema = {
 
 @route(body_schema=user_schema)
 def create_user(request):
-    # If the request's body does not 
+    # If the request's body does not
     # satisfy the user_schema,
     # a 400 will be returned
 
@@ -107,7 +107,7 @@ query_params_schema = {
     "properties": {
         # Only string types are allowed for query parameters.
         # Types casting should be done in the handler.
-        "page": {"type": "string"} 
+        "page": {"type": "string"}
     },
     "additionalProperties": False
 }
