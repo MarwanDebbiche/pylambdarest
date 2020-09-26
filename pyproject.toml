@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pylambdarest"
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 description = "Lightweight framework for building REST API using AWS Lambda + API Gateway"
 authors = ["Marwan Debbiche (Macbook Pro) <marwan.debbiche@gmail.com>"]
@@ -21,6 +21,9 @@ jsonschema = "^3.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.2"
+pylint = "^2.6.0"
+pycodestyle = "^2.6.0"
+flake8 = "^3.8.3"
 
 [build-system]
 requires = ["poetry>=0.12"]

@@ -1,8 +1,7 @@
 from inspect import getfullargspec
-import traceback
 
 from jsonschema import validate
-from jsonschema.exceptions import ValidationError, SchemaError
+from jsonschema.exceptions import ValidationError
 
 from pylambdarest.request import Request
 from pylambdarest.response import Response

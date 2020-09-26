@@ -4,9 +4,13 @@ import json
 class Response:
     def __init__(self, code, body=None, headers=None):
         if type(code) != int:
-            raise ValueError(f"Invalid code. {code} is not of type int")
+            raise TypeError(
+                f"Invalid status code. {type(code)} is not int."
+            )
         if type(headers) not in [type(None), dict]:
-            raise ValueError(f"Invalid headers. {headers} is not of NoneType, dict")
+            raise TypeError(
+                f"Invalid headers. {type(headers)} is not in [NoneType, dict]."
+            )
         self.code = code
         self.body = body
         self.headers = headers

@@ -4,7 +4,7 @@ import json
 class Request:
     def __init__(self, event):
         if type(event) != dict:
-            raise ValueError(f"Invalid event. {event} is not of type dict")
+            raise TypeError(f"Invalid event. {type(event)} is not dict.")
         self.event = event
 
     @property
