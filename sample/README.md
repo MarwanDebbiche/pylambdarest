@@ -13,12 +13,11 @@ Handlers are defined in [handler.py](./handler.py) using pylambdarest.
 poetry install
 ```
 
-*N.B: For now I am unable to deploy the service using poetry due to an error with jsonschema installation. I have opened an [issue](https://github.com/UnitedIncome/serverless-python-requirements/issues/555) on the serverless-python-requirements repository*
-
 **With pip:**
 ```
 pip install -r requirements.txt
 ```
+*N.B: If you use pip instead of poetry for dependency management, you will need to change `usePoetry: true` to `usePoetry: false` in the serverless.yaml.*
 
 # Test
 
