@@ -51,10 +51,10 @@ class route:
     >>> @route(body_schema=user_schema)
     ... def hello(request):
     ...     name = request.json["name"]
-    ...     return 200, {"message" : f"Hello {name} from pylambdarest !"}
+    ...     return 200, {"message" : f"Hello {name} !"}
 
     >>> hello({"body": '{"name": "John Doe"}'}, {})
-    {'statusCode': 200, 'body': '{"message": "Hello John Doe from pylambdarest !"}'}
+    {'statusCode': 200, 'body': '{"message": "Hello John Doe !"}'}
 
     If the request's body does not match the schema, a 400 will be sent.
 
