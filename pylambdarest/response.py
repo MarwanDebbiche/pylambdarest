@@ -3,6 +3,22 @@ from typing import Optional, Dict, Any
 
 
 class Response:
+    """
+    Internal Response object created in a @route handler.
+
+    Response objects are responsible for the formatting
+    of the response to the expected Lambda response format.
+
+    Parameters
+    ----------
+    code : int
+        Response HTTP status code.
+    body : Any
+        Response body. Must be JSON serializable.
+    headers : dict
+        Response headers.
+    """
+
     def __init__(
         self,
         code: int,
@@ -21,8 +37,13 @@ class Response:
 
     def format(self) -> Dict[str, Any]:
         """
-        Format the Response instance to the
-        expected Lambda response format.
+        Format the Response instance to the expected Lambda response format.
+
+        Examples
+        --------
+        >>> res = Response(200, {"message": "Hello from pylambdarest !"})
+        >>> res.format()
+        {'statusCode': 200, 'body': '{"message": "Hello from pylambdarest !"}'}
         """
         response: Dict[str, Any] = {"statusCode": self.code}
 
