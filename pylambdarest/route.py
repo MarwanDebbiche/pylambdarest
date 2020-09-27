@@ -79,33 +79,40 @@ class route:
         function_args = getfullargspec(function).args
 
         def inner_func(event, context):
-            try:
-                func_args_values = {}
-                request = Request(event)
-                self.validate_request(request)
 
-                for arg in function_args:
-                    if arg in request.path_params:
-                        func_args_values[arg] = request.path_params.get(arg)
-                    elif arg not in self._ROUTE_ARGS:
-                        raise ValueError(f"Unexpected route argument {arg}")
-                    else:
-                        func_args_values[arg] = eval(arg)
+            func_args_values = {}
+            request = Request(event)
+            validation_error = self._validate_request(request)
+            if validation_error is not None:
+                return Response(
+                    400, str(validation_error).split("\n")[0]
+                ).format()
 
-                res = function(**func_args_values)
-                if not isinstance(res, tuple):
-                    res = (res,)
+            for arg in function_args:
+                if arg in request.path_params:
+                    func_args_values[arg] = request.path_params.get(arg)
+                elif arg not in self._ROUTE_ARGS:
+                    raise ValueError(f"Unexpected route argument {arg}")
+                else:
+                    func_args_values[arg] = eval(arg)
 
-                return Response(*res).format()
+            res = function(**func_args_values)
+            if not isinstance(res, tuple):
+                res = (res,)
 
-            except ValidationError as e:
-                return Response(400, str(e).split("\n")[0]).format()
+            return Response(*res).format()
 
         return inner_func
 
-    def validate_request(self, request: Request) -> None:
-        if self.body_schema is not None:
-            validate(request.json, self.body_schema)
+    def _validate_request(self, request: Request) -> Optional[str]:
+        try:
+            if self.body_schema is not None:
+                validate(request.json, self.body_schema)
 
-        if self.query_params_schema is not None:
-            validate(request.query_params, self.query_params_schema)
+            if self.query_params_schema is not None:
+                validate(request.query_params, self.query_params_schema)
+
+        except ValidationError as e:
+            return str(e).split("\n")[0]
+
+        return None
