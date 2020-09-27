@@ -108,3 +108,14 @@ def test_schema_validation(schema_validation_route):
     }
     response = schema_validation_route(event, context)
     assert response["statusCode"] == 200
+
+
+def test_invalid_null_body():
+    @route()
+    def empty_route(request):
+        assert request.body is None
+        assert request.json is None
+        return 200
+
+    empty_route({}, {})
+    empty_route({"body": None}, {})

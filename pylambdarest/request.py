@@ -33,7 +33,7 @@ class Request:
         >>> Request(event).body
         '{"name": "John Doe"}'
         """
-        return self.event["body"]
+        return self._get_event_key("body", none_as_empty=False)
 
     @property
     def json(self) -> Optional[dict]:
@@ -46,8 +46,8 @@ class Request:
         >>> Request(event).json["name"]
         'John Doe'
         """
-        if self.event["body"] is not None:
-            return json.loads(self.event["body"])
+        if self.body is not None:
+            return json.loads(self.body)
 
         return None
 
