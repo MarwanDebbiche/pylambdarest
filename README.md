@@ -1,5 +1,7 @@
 # pylambdarest
 
+[![CI/CD Status](https://github.com/MarwanDebbiche/pylambdarest/workflows/CI%20CD/badge.svg)](https://github.com/MarwanDebbiche/pylambdarest/actions)
+
 pylambdarest is a lightweight framework for building REST API using AWS Lambda + API Gateway.
 
 Unlike most of other Python frameworks, it does not provide any routing capability. The routing should be handled by API Gateway itself.
