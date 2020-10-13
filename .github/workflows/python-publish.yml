@@ -31,7 +31,13 @@ jobs:
           poetry run flake8 --count --select=E9,F63,F7,F82 --show-source --statistics --extend-exclude=node_modules
           poetry run flake8 --count --exit-zero --max-complexity=10 --max-line-length=79 --statistics --extend-exclude=node_modules
       - name: Pytest
-        run: poetry run pytest --cov=pylambdarest tests
+        run: |
+          poetry run coverage run -m --source=pylambdarest pytest tests
+          poetry run coverage report
+      - name: Coveralls
+        run: poetry run coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
   publish:
     needs: test

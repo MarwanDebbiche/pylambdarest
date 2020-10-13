@@ -1,6 +1,7 @@
 # pylambdarest
 
-[![CI/CD Status](https://github.com/MarwanDebbiche/pylambdarest/workflows/CI%20CD/badge.svg)](https://github.com/MarwanDebbiche/pylambdarest/actions)
+[![CI/CD Status](https://github.com/MarwanDebbiche/pylambdarest/workflows/CI%20CD/badge.svg?branch=master)](https://github.com/MarwanDebbiche/pylambdarest/actions?query=branch:master)
+[![Coverage Status](https://coveralls.io/repos/github/MarwanDebbiche/pylambdarest/badge.svg?branch=master)](https://coveralls.io/github/MarwanDebbiche/pylambdarest?branch=master)
 
 pylambdarest is a lightweight framework for building REST API using AWS Lambda + API Gateway.
 
