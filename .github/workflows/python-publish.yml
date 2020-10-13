@@ -1,7 +1,7 @@
 # Github Action workflow for static analysis (flake8),
 # testing (pytest), and publishing to PyPi.
 
-name: CI CD
+name: CI/CD
 
 on:
   push:
