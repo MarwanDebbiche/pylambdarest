@@ -1,3 +1,11 @@
+"""
+Response
+--------
+Validation and Formatting of handler's response
+to the expected API Gateway response format.
+
+"""
+
 import json
 from typing import Optional, Dict, Any
 
@@ -17,6 +25,12 @@ class Response:
         Response body. Must be JSON serializable.
     headers : dict
         Response headers.
+
+    Examples
+    --------
+    >>> response = Response(200, {"message": "Hello From pylamndarest!"})
+    >>> response.format()
+    {'statusCode': 200, 'body': '{"message": "Hello John Doe !"}'}
     """
 
     def __init__(
@@ -25,7 +39,7 @@ class Response:
         body: Optional[Any] = None,
         headers: Optional[dict] = None,
     ) -> None:
-        if type(code) != int:
+        if not isinstance(code, int):
             raise TypeError(f"Invalid status code. {type(code)} is not int.")
         if type(headers) not in [type(None), dict]:
             raise TypeError(

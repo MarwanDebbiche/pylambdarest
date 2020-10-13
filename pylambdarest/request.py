@@ -1,3 +1,10 @@
+"""
+Request
+-------
+Information parsed from the API Gateway event.
+
+"""
+
 import json
 from typing import Optional
 
@@ -18,7 +25,7 @@ class Request:
     """
 
     def __init__(self, event: dict):
-        if type(event) != dict:
+        if not isinstance(event, dict):
             raise TypeError(f"Invalid event. {type(event)} is not dict.")
         self.event = event
 
