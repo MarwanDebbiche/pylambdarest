@@ -1,7 +1,7 @@
 from inspect import getfullargspec
 from typing import Optional
 
-from jsonschema import validate
+from jsonschema.validators import Draft7Validator
 from jsonschema.exceptions import ValidationError
 
 from pylambdarest.request import Request
@@ -75,6 +75,14 @@ class route:
         self.body_schema = body_schema
         self.query_params_schema = query_params_schema
 
+        if self.body_schema is not None:
+            self.body_schema_validator = Draft7Validator(body_schema)
+
+        if self.query_params_schema is not None:
+            self.query_params_schema_validator = Draft7Validator(
+                query_params_schema
+            )
+
     def __call__(self, function, *args, **kwargs):
         function_args = getfullargspec(function).args
 
@@ -107,10 +115,12 @@ class route:
     def _validate_request(self, request: Request) -> Optional[str]:
         try:
             if self.body_schema is not None:
-                validate(request.json, self.body_schema)
+                self.body_schema_validator.validate(request.json)
 
             if self.query_params_schema is not None:
-                validate(request.query_params, self.query_params_schema)
+                self.query_params_schema_validator.validate(
+                    request.query_params
+                )
 
         except ValidationError as e:
             return str(e).split("\n")[0]
