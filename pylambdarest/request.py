@@ -28,7 +28,7 @@ class Request:
         self.event = event
 
     @property
-    def body(self):
+    def body(self) -> Optional[str]:
         """
         Return the raw body field of the API Gateway event.
 
@@ -38,7 +38,7 @@ class Request:
         >>> Request(event).body
         '{"name": "John Doe"}'
         """
-        return self._get_event_key("body", none_as_empty=False)
+        return self.event.get("body")
 
     @property
     def json(self) -> Optional[dict]:
@@ -57,7 +57,7 @@ class Request:
         return None
 
     @property
-    def path_params(self) -> Optional[dict]:
+    def path_params(self) -> dict:
         """
         Return the pathParameters field of the API Gateway event.
 
@@ -67,10 +67,11 @@ class Request:
         >>> Request(event).path_params
         {'user_id': 123}
         """
-        return self._get_event_key("pathParameters")
+
+        return self._get_event_key_none_as_empty("pathParameters")
 
     @property
-    def query_params(self) -> Optional[dict]:
+    def query_params(self) -> dict:
         """
         Return the queryStringParameters field of the API Gateway event.
 
@@ -80,7 +81,7 @@ class Request:
         >>> Request(event).query_params
         {'page': '3'}
         """
-        return self._get_event_key("queryStringParameters")
+        return self._get_event_key_none_as_empty("queryStringParameters")
 
     @property
     def method(self) -> str:
@@ -108,14 +109,12 @@ class Request:
         """
         return self.event["headers"]
 
-    def _get_event_key(
-        self, key: str, none_as_empty: bool = True
-    ) -> Optional[dict]:
+    def _get_event_key_none_as_empty(self, key: str) -> dict:
         """
         Get specific key from event object.
         """
         value = self.event.get(key)
-        if value is None and none_as_empty:
+        if value is None:
             return {}
 
         return value

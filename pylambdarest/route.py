@@ -5,11 +5,12 @@ API Gateway -> Lambda handler.
 
 """
 
+from collections.abc import Callable
 from inspect import getfullargspec
 from typing import Optional
 
-from jsonschema.validators import Draft7Validator
-from jsonschema.exceptions import ValidationError
+from jsonschema.validators import Draft7Validator  # type: ignore
+from jsonschema.exceptions import ValidationError  # type: ignore
 
 from pylambdarest.request import Request
 from pylambdarest.response import Response
@@ -73,27 +74,26 @@ class route:
     """
 
     _ROUTE_ARGS = ["event", "context", "request"]
+    body_schema_validator = None
+    query_params_schema_validator = None
 
     def __init__(
         self,
         body_schema: Optional[dict] = None,
         query_params_schema: Optional[dict] = None,
     ):
-        self.body_schema = body_schema
-        self.query_params_schema = query_params_schema
-
-        if self.body_schema is not None:
+        if body_schema is not None:
             self.body_schema_validator = Draft7Validator(body_schema)
 
-        if self.query_params_schema is not None:
+        if query_params_schema is not None:
             self.query_params_schema_validator = Draft7Validator(
                 query_params_schema
             )
 
-    def __call__(self, function, *args, **kwargs):
+    def __call__(self, function, *args, **kwargs) -> Callable:
         function_args = getfullargspec(function).args
 
-        def inner_func(event, context):
+        def inner_func(event, context) -> dict:
 
             func_args_values = {}
             request = Request(event)
@@ -121,10 +121,10 @@ class route:
 
     def _validate_request(self, request: Request) -> Optional[str]:
         try:
-            if self.body_schema is not None:
+            if self.body_schema_validator is not None:
                 self.body_schema_validator.validate(request.json)
 
-            if self.query_params_schema is not None:
+            if self.query_params_schema_validator is not None:
                 self.query_params_schema_validator.validate(
                     request.query_params
                 )
