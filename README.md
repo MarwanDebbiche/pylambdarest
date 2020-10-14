@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/MarwanDebbiche/pylambdarest/badge.svg?branch=master)](https://coveralls.io/github/MarwanDebbiche/pylambdarest?branch=master)
 [![Latest Version](https://img.shields.io/pypi/v/pylambdarest.svg?color=blue)](https://pypi.python.org/pypi/pylambdarest)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/pylambdarest?label=pypi%20downloads)](https://pypi.org/project/pylambdarest/)
+![License](https://img.shields.io/github/license/MarwanDebbiche/pylambdarest)
 
 pylambdarest is a lightweight opinionated framework for building REST API using [AWS Lambda](https://aws.amazon.com/lambda/) and [API Gateway](https://aws.amazon.com/api-gateway/).
 
