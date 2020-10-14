@@ -5,11 +5,34 @@
 [![Latest Version](https://img.shields.io/pypi/v/pylambdarest.svg?color=blue)](https://pypi.python.org/pypi/pylambdarest)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/pylambdarest?label=pypi%20downloads)](https://pypi.org/project/pylambdarest/)
 
-pylambdarest is a lightweight framework for building REST API using AWS Lambda + API Gateway.
+pylambdarest is a lightweight opinionated framework for building REST API using [AWS Lambda](https://aws.amazon.com/lambda/) and [API Gateway](https://aws.amazon.com/api-gateway/).
 
-Unlike most of other Python frameworks, it does not provide any routing capability. The routing should be handled by API Gateway itself.
+## Motivation
 
-Basically, it provides a `@route` decorator to parse the API Gateway event into a `Request` object accessible from the handler function as an argument. It also formats the handler's output to the expected Lambda + API Gateway format seamlessly.
+Why another framework ?
+
+When using API Gateway and python Lambda functions, the most common pattern is to have a unique Lambda function triggered by a proxy API Gateway resource. The Lambda then uses a framework like [Flask](https://flask.palletsprojects.com/en/1.1.x/) to do all the routing. In an API Gateway + Lambda context, I feel like **the routing should be handled by API Gateway itself**, then forwarding the request to specific Lambda functions for each resource or endpoint.
+
+## Features
+
+- No routing. Yes, this is a feature. Routing should be handled by API Gateway.
+- API Gateway event parsing (including request body and path parameters).
+- Cleaner syntax.
+- Optional body schema and query parameters validation.
+
+## Installation
+
+Install the package from PyPI using pip:
+
+```
+$ pip install pylambdarest
+```
+
+pylambdarest should also be included in the deployment package of your Lambda functions.
+
+## Getting started
+
+pylambdarest provides a `@route` decorator to parse the API Gateway event into a `Request` object available in the handler function as an argument. It also formats the handler's output to the expected Lambda + API Gateway format seamlessly.
 
 Turning this:
 
@@ -52,7 +75,6 @@ from pylambdarest import route
 @route()
 def handler(request, event, context):
     print(event)
-    print(context)
     body = request.json
 
     return 200, {"message": f"Hello from AWS Lambda {body['name']}!!"}
@@ -81,7 +103,7 @@ def get_user(user_id):
 
 ## Schema Validation
 
-pylambdarest also provides basic schema validation using [jsonschema](https://github.com/Julian/jsonschema):
+pylambdarest optional provides optional schema validation using [jsonschema](https://github.com/Julian/jsonschema):
 
 ```python
 from pylambdarest import route
@@ -129,24 +151,10 @@ def get_users(request):
     return 200, users
 ```
 
-## Motivation
+## Example
 
-Why another framework ?
+You can look at the [sample](https://github.com/MarwanDebbiche/pylambdarest/tree/master/sample) for a minimal pylambdarest API.
 
-When using API Gateway and python Lambdas, the most common pattern is to have one unique Lambda triggered by a proxy API Gateway resource. The Lambda then uses a framework like Flask to do all the routing. In an API Gateway + Lambda context, I feel like **the routing should be handled by API Gateway itself**, then forwarding the request to specific Lambda functions for each resource or endoint.
+In this sample, we use the [serverless](https://www.serverless.com/) framework to declare the API Gateway -> Lambda routing
 
-N.B: I find it useful to declare the API Gateway -> Lambda routing using the amazing [serverless](https://www.serverless.com/) framework
-
-## Installation
-
-You can install pylambdarest using pip:
-
-```
-pip install pylambdarest
-```
-
-pylambdarest should also be included in the deployment package of your Lambdas. If you use the serverless framework to manage your deployment, this can be done easily using the [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements) plugin.
-
-To speed-up your API development, I also recommend using the [serverless-offline](https://github.com/dherault/serverless-offline) plugin.
-
-You can look at the [sample](https://github.com/MarwanDebbiche/pylambdarest/tree/master/sample) to have a working example of this set-up.
+The packaging of the Lambda functions is done using the [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements) plugin.

@@ -32,8 +32,8 @@ class route:
         Optional jsonschema for the request's body.
         If the body does not match the provided body_schema,
         the request will result in a 400 code.
-        For jsonschma specification, please see `here
-        <https://github.com/Julian/jsonschema>_.`
+        For jsonschema specification, please see
+        `here <https://github.com/Julian/jsonschema>`_.
 
     query_params_schema : dict
         Optional jsonschema for the query string parameters.

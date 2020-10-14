@@ -11,9 +11,7 @@ from typing import Optional
 
 class Request:
     """
-    Parsed Request object.
-
-    Request objects are created in @route handlers, are and accessible
+    Request objects created in @route handlers, and accessible
     from within the handler as the "request" argument.
     It contains parsed information about the API Gateway event.
 
@@ -78,9 +76,9 @@ class Request:
 
         Examples
         --------
-        >>> event = {"queryStringParameters": {"page": 3}}
+        >>> event = {"queryStringParameters": {"page": "3"}}
         >>> Request(event).query_params
-        {'page': 3}
+        {'page': '3'}
         """
         return self._get_event_key("queryStringParameters")
 
