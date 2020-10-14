@@ -103,7 +103,7 @@ def get_user(user_id):
 
 ## Schema Validation
 
-pylambdarest optional provides optional schema validation using [jsonschema](https://github.com/Julian/jsonschema):
+pylambdarest optionally provides schema validation using [jsonschema](https://github.com/Julian/jsonschema):
 
 ```python
 from pylambdarest import route

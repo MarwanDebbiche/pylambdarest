@@ -2,7 +2,7 @@
    :maxdepth: 4
    :hidden:
 
-   apireference
+   api_reference
 
 .. mdinclude:: ../../README.md
 
