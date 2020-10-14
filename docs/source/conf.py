@@ -13,14 +13,14 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.dirname(os.path.dirname((os.path.abspath(".")))))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'pylambdarest'
-copyright = '2020, Marwan Debbiche'
-author = 'Marwan Debbiche'
+project = "pylambdarest"
+copyright = "2020, Marwan Debbiche"
+author = "Marwan Debbiche"
 
 
 # -- General configuration ---------------------------------------------------
@@ -28,7 +28,7 @@ author = 'Marwan Debbiche'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-master_doc = 'index'
+master_doc = "index"
 extensions = [
     "m2r2",
     "sphinx.ext.autodoc",
@@ -36,10 +36,10 @@ extensions = [
     "sphinx_rtd_theme",
 ]
 
-source_suffix = ['.rst', '.md']
+source_suffix = [".rst", ".md"]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
