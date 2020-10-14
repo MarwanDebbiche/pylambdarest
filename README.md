@@ -2,6 +2,8 @@
 
 [![CI/CD Status](https://github.com/MarwanDebbiche/pylambdarest/workflows/CI%2FCD/badge.svg?branch=master)](https://github.com/MarwanDebbiche/pylambdarest/actions?query=branch:master)
 [![Coverage Status](https://coveralls.io/repos/github/MarwanDebbiche/pylambdarest/badge.svg?branch=master)](https://coveralls.io/github/MarwanDebbiche/pylambdarest?branch=master)
+[![Latest Version](https://img.shields.io/pypi/v/pylambdarest.svg?color=blue)](https://pypi.python.org/pypi/pylambdarest)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/pylambdarest?label=pypi%20downloads)](https://pypi.org/project/pylambdarest/)
 
 pylambdarest is a lightweight framework for building REST API using AWS Lambda + API Gateway.
 
@@ -41,7 +43,6 @@ def handler(request):
 
     return 200, {"message": f"Hello from AWS Lambda {body['name']}!!"}
 ```
-
 
 You can still access the original `event` and `context` arguments from the handler:
 
