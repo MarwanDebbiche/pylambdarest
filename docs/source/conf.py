@@ -12,7 +12,6 @@
 #
 import os
 import sys
-import poetry_version
 
 
 PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname((os.path.abspath("."))))
@@ -24,16 +23,13 @@ sys.path.insert(0, PROJECT_ROOT_DIR)
 project = "pylambdarest"
 copyright = "2020, Marwan Debbiche"
 author = "Marwan Debbiche"
-release = poetry_version.extract(
-    source_file=os.path.join(PROJECT_ROOT_DIR, "pyproject.toml")
-)
+master_doc = "index"
 
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-master_doc = "index"
 extensions = [
     "m2r2",
     "sphinx.ext.autodoc",
