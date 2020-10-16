@@ -12,8 +12,11 @@
 #
 import os
 import sys
+import poetry_version
 
-sys.path.insert(0, os.path.dirname(os.path.dirname((os.path.abspath(".")))))
+
+PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname((os.path.abspath("."))))
+sys.path.insert(0, PROJECT_ROOT_DIR)
 
 
 # -- Project information -----------------------------------------------------
@@ -21,7 +24,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname((os.path.abspath(".")))))
 project = "pylambdarest"
 copyright = "2020, Marwan Debbiche"
 author = "Marwan Debbiche"
-
+release = poetry_version.extract(
+    source_file=os.path.join(PROJECT_ROOT_DIR, "pyproject.toml")
+)
 
 # -- General configuration ---------------------------------------------------
 
