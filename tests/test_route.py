@@ -24,6 +24,24 @@ def get_user_route():
 
 
 @pytest.fixture
+def invalid_code_route():
+    @route()
+    def invalid_code_handler():
+        return "code"
+
+    return invalid_code_handler
+
+
+@pytest.fixture
+def invalid_response_headers_route():
+    @route()
+    def invalid_response_headers_handler():
+        return 200, {}, "invalid_headers"
+
+    return invalid_response_headers_handler
+
+
+@pytest.fixture
 def schema_validation_route():
     body_schema = {
         "type": "object",
@@ -72,9 +90,19 @@ def test_path_params(get_user_route):
 def test_invalid_route_args(get_user_route):
     # test that calling the get_user_route
     # without the expected user_id in pathParameters
-    # raises a ValueError
-    with pytest.raises(ValueError):
+    # raises a TypeError
+    with pytest.raises(TypeError):
         get_user_route({}, {})
+
+
+def test_invalid_code(invalid_code_route):
+    with pytest.raises(TypeError):
+        invalid_code_route({}, {})
+
+
+def test_invalid_invalid_response_headers(invalid_response_headers_route):
+    with pytest.raises(TypeError):
+        invalid_response_headers_route({}, {})
 
 
 def test_event_context(event_context_as_headers_route):
@@ -117,5 +145,5 @@ def test_invalid_null_body():
         assert request.json is None
         return 200
 
-    empty_route({}, {})
-    empty_route({"body": None}, {})
+    empty_route({}, {})  # pylint: disable=too-many-function-args
+    empty_route({"body": None}, {})  # pylint: disable=too-many-function-args

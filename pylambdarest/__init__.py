@@ -1,5 +1,7 @@
-from pylambdarest.route import route
-from pylambdarest.request import Request
-from pylambdarest.response import Response
+"""
+pylambdarest - RESTful API with AWS Lambda and API Gateway.
+"""
 
-__all__ = ["route", "Request", "Response"]
+from pylambdarest.route import route
+
+__all__ = ["route"]

@@ -7,16 +7,16 @@ API Gateway -> Lambda handler.
 
 from collections.abc import Callable
 from inspect import getfullargspec
-from typing import Optional
+import json
+from typing import Optional, Dict, Any
 
 from jsonschema.validators import Draft7Validator  # type: ignore
 from jsonschema.exceptions import ValidationError  # type: ignore
 
 from pylambdarest.request import Request
-from pylambdarest.response import Response
 
 
-class route:
+class route:  # pylint: disable=C0103,R0903
     """
     Lambda handler decorator.
 
@@ -73,49 +73,54 @@ class route:
     for query string parameters validation.
     """
 
-    _ROUTE_ARGS = ["event", "context", "request"]
-    body_schema_validator = None
-    query_params_schema_validator = None
-
     def __init__(
         self,
         body_schema: Optional[dict] = None,
         query_params_schema: Optional[dict] = None,
     ):
-        if body_schema is not None:
-            self.body_schema_validator = Draft7Validator(body_schema)
 
-        if query_params_schema is not None:
-            self.query_params_schema_validator = Draft7Validator(
-                query_params_schema
-            )
+        self.body_schema_validator = (
+            Draft7Validator(body_schema) if body_schema is not None else None
+        )
 
-    def __call__(self, function, *args, **kwargs) -> Callable:
-        function_args = getfullargspec(function).args
+        self.query_params_schema_validator = (
+            Draft7Validator(query_params_schema)
+            if query_params_schema is not None
+            else None
+        )
+
+    def __call__(self, handler, *args, **kwargs) -> Callable:
+        handler_args = getfullargspec(handler).args
 
         def inner_func(event, context) -> dict:
 
-            func_args_values = {}
-            request = Request(event)
+            func_args_values: dict = {}
+            request: Request = Request(event)
             validation_error = self._validate_request(request)
             if validation_error is not None:
-                return Response(
+                return route._format_response(
                     400, str(validation_error).split("\n")[0]
-                ).format()
+                )
 
-            for arg in function_args:
+            for arg in handler_args:
                 if arg in request.path_params:
                     func_args_values[arg] = request.path_params.get(arg)
-                elif arg not in self._ROUTE_ARGS:
-                    raise ValueError(f"Unexpected route argument {arg}")
+                elif arg == "event":
+                    func_args_values["event"] = event
+                elif arg == "context":
+                    func_args_values["context"] = context
+                elif arg == "request":
+                    func_args_values["request"] = request
                 else:
-                    func_args_values[arg] = eval(arg)
+                    raise TypeError(
+                        f"handler got an unexpected argument '{arg}'"
+                    )
 
-            res = function(**func_args_values)
+            res = handler(**func_args_values)
             if not isinstance(res, tuple):
                 res = (res,)
 
-            return Response(*res).format()
+            return route._format_response(*res)
 
         return inner_func
 
@@ -133,3 +138,26 @@ class route:
             return str(err).split("\n")[0]
 
         return None
+
+    @staticmethod
+    def _format_response(
+        code: int, body: Any = None, headers: Optional[dict] = None
+    ) -> Dict[str, Any]:
+        """
+        Format the handler's response to the expected Lambda response format.
+        """
+        if not isinstance(code, int):
+            raise TypeError(f"Invalid status code. {type(code)} is not int.")
+        if type(headers) not in [type(None), dict]:
+            raise TypeError(
+                f"Invalid headers. {type(headers)} is not in [NoneType, dict]."
+            )
+        response: Dict[str, Any] = {"statusCode": code}
+
+        if body is not None:
+            response["body"] = json.dumps(body)
+
+        if headers is not None:
+            response["headers"] = headers
+
+        return response

@@ -1,6 +1,6 @@
 import pytest
 
-from pylambdarest import Request
+from pylambdarest.request import Request
 
 
 def event():
