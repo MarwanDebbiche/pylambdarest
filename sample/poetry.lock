@@ -32,13 +32,27 @@ format_nongpl = ["idna", "jsonpointer (>1.13)", "webcolors", "rfc3986-validator 
 
 [[package]]
 category = "main"
+description = "JSON Web Token implementation in Python"
+name = "pyjwt"
+optional = false
+python-versions = "*"
+version = "1.7.1"
+
+[package.extras]
+crypto = ["cryptography (>=1.4)"]
+flake8 = ["flake8", "flake8-import-order", "pep8-naming"]
+test = ["pytest (>=4.0.1,<5.0.0)", "pytest-cov (>=2.6.0,<3.0.0)", "pytest-runner (>=4.2,<5.0.0)"]
+
+[[package]]
+category = "main"
 description = "Lightweight framework for building REST API using AWS Lambda + API Gateway"
 name = "pylambdarest"
 optional = false
 python-versions = ">=3.6.1,<4.0.0"
-version = "0.1.5"
+version = "0.1.7"
 
 [package.dependencies]
+PyJWT = ">=1.7.1,<2.0.0"
 jsonschema = ">=3.2.0,<4.0.0"
 
 [[package]]
@@ -71,9 +85,13 @@ jsonschema = [
     {file = "jsonschema-3.2.0-py2.py3-none-any.whl", hash = "sha256:4e5b3cf8216f577bee9ce139cbe72eca3ea4f292ec60928ff24758ce626cd163"},
     {file = "jsonschema-3.2.0.tar.gz", hash = "sha256:c8a85b28d377cc7737e46e2d9f2b4f44ee3c0e1deac6bf46ddefc7187d30797a"},
 ]
+pyjwt = [
+    {file = "PyJWT-1.7.1-py2.py3-none-any.whl", hash = "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e"},
+    {file = "PyJWT-1.7.1.tar.gz", hash = "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"},
+]
 pylambdarest = [
-    {file = "pylambdarest-0.1.5-py3-none-any.whl", hash = "sha256:cb99e89407b8beebecd2423ec1492f85f29ca7a812cea1e5f46414bb417a4b3d"},
-    {file = "pylambdarest-0.1.5.tar.gz", hash = "sha256:14fe9f436d819d4e9a9a29774be0406c674e18982b64aa5ade44e36799575476"},
+    {file = "pylambdarest-0.1.7-py3-none-any.whl", hash = "sha256:a5b86e9f68580603520bc906dba8818a7eb9ee800e08771a59d3ef43aaaab534"},
+    {file = "pylambdarest-0.1.7.tar.gz", hash = "sha256:d753178b69c3099143ad20f9b204b8516bfe5ee26b7df3159ac3c97fa88bb21f"},
 ]
 pyrsistent = [
     {file = "pyrsistent-0.17.3.tar.gz", hash = "sha256:2e636185d9eb976a18a8a8e96efce62f2905fea90041958d8cc2a189756ebf3e"},
