@@ -8,10 +8,5 @@ route
 
 Request
 -------
-.. autoclass:: pylambdarest.Request
-   :members:
-
-Response
---------
-.. autoclass:: pylambdarest.Response
+.. autoclass:: pylambdarest.request.Request
    :members:
