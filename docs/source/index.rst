@@ -3,6 +3,8 @@
    :hidden:
 
    api_reference
+   contributing
+
 
 .. mdinclude:: ../../README.md
 

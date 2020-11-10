@@ -13,7 +13,6 @@
 import os
 import sys
 
-
 PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname((os.path.abspath("."))))
 sys.path.insert(0, PROJECT_ROOT_DIR)
 
@@ -31,7 +30,7 @@ master_doc = "index"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "m2r2",
+    "m2r",
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
