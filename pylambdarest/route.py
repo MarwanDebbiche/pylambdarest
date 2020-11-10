@@ -7,11 +7,11 @@ API Gateway -> Lambda handler.
 
 from collections.abc import Callable
 from inspect import getfullargspec
-import json
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
 
-from jsonschema.validators import Draft7Validator  # type: ignore
+import simplejson as json
 from jsonschema.exceptions import ValidationError  # type: ignore
+from jsonschema.validators import Draft7Validator  # type: ignore
 
 from pylambdarest.request import Request
 

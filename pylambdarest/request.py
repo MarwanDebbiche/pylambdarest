@@ -5,8 +5,9 @@ Information parsed from the API Gateway event.
 
 """
 
-import json
 from typing import Optional
+
+import simplejson as json
 
 
 class Request:
