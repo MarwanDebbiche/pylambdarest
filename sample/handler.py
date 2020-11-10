@@ -1,8 +1,6 @@
+from schemas import get_users_query_params_schema, user_schema
+
 from pylambdarest import route
-from schemas import (
-    user_schema,
-    get_users_query_params_schema
-)
 
 
 @route()
@@ -13,10 +11,7 @@ def hello():
 @route()
 def get_user(user_id):
     # request db data for user <user_id> here
-    user = {
-        "userId": user_id,
-        "name": "John Doe"
-    }
+    user = {"userId": user_id, "name": "John Doe"}
 
     return 200, user
 

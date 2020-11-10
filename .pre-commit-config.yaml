@@ -16,12 +16,16 @@ repos:
     rev: 3.8.4
     hooks:
       - id: flake8
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.6.4
+    hooks:
+      - id: isort
   - repo: local
     hooks:
       - id: pylint
         name: pylint
         entry: pylint
-        exclude: ^(tests/)|^(docs/)
+        exclude: ^(tests/)|^(docs/)|^(sample/)
         language: system
         types: [python]
   - repo: https://github.com/pre-commit/mirrors-mypy
