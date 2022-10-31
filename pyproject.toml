@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pylambdarest"
-version = "0.2.0"
+version = "0.2.1"
 license = "MIT"
 description = "Lightweight framework for building REST API using AWS Lambda + API Gateway"
 authors = ["Marwan Debbiche (Macbook Pro) <marwan.debbiche@gmail.com>"]
@@ -16,24 +16,28 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6.1"
+python = "^3.7.2"
 jsonschema = "^3.2.0"
-PyJWT = {version = "^1.7.1", optional = true}
+PyJWT = {version = "^2.6.0", optional = true}
 simplejson = "^3.17.2"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.0.2"
-pylint = "^2.6.0"
-flake8 = "^3.8.3"
-pre-commit = "^2.7.1"
-black = "^20.8b1"
-coverage = "^5.3"
-coveralls = "^2.1.2"
-mypy = "^0.790"
-sphinx-rtd-theme = "^0.5.0"
+flake8 = "^5.0.4"
+pytest = "^7.2.0"
+pylint = "^2.15.5"
+pre-commit = "^2.20.0"
+black = "^22.10.0"
+coverage = "^6.5.0"
+coveralls = "^3.3.1"
+mypy = "^0.982"
+sphinx-rtd-theme = "^1.0.0"
 m2r = "^0.2.1"
 sphinx = "1.8.5"
+types-simplejson = "^3.17.7.1"
 
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.black]
+line-length = 79

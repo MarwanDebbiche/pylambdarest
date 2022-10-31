@@ -99,7 +99,7 @@ class route:  # pylint: disable=C0103,R0903
             validation_error = self._validate_request(request)
             if validation_error is not None:
                 return route._format_response(
-                    400, str(validation_error).split("\n")[0]
+                    400, str(validation_error).split("\n", maxsplit=1)[0]
                 )
 
             for arg in handler_args:
@@ -135,7 +135,7 @@ class route:  # pylint: disable=C0103,R0903
                 )
 
         except ValidationError as err:
-            return str(err).split("\n")[0]
+            return str(err).split("\n", maxsplit=1)[0]
 
         return None
 

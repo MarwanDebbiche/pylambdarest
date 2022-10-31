@@ -12,8 +12,7 @@
   },
   "author": "Marwan Debbiche",
   "devDependencies": {
-    "serverless": "^1.83.0",
-    "serverless-offline": "^6.8.0",
-    "serverless-python-requirements": "^5.1.0"
+    "serverless-offline": "^11.2.1",
+    "serverless-python-requirements": "^6.0.0"
   }
 }
