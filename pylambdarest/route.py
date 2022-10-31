@@ -7,11 +7,10 @@ API Gateway -> Lambda handler.
 
 from collections.abc import Callable
 from inspect import getfullargspec
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Type
 
+from pydantic import BaseModel, ValidationError
 import simplejson as json
-from jsonschema.exceptions import ValidationError  # type: ignore
-from jsonschema.validators import Draft7Validator  # type: ignore
 
 from pylambdarest.request import Request
 
@@ -75,19 +74,14 @@ class route:  # pylint: disable=C0103,R0903
 
     def __init__(
         self,
-        body_schema: Optional[dict] = None,
-        query_params_schema: Optional[dict] = None,
+        body_model: Optional[Type[BaseModel]] = None,
+        query_params_model: Optional[Type[BaseModel]] = None,
+        response_model: Optional[Type[BaseModel]] = None,
     ):
 
-        self.body_schema_validator = (
-            Draft7Validator(body_schema) if body_schema is not None else None
-        )
-
-        self.query_params_schema_validator = (
-            Draft7Validator(query_params_schema)
-            if query_params_schema is not None
-            else None
-        )
+        self.body_model: Optional[Type[BaseModel]] = body_model
+        self.query_params_model: Optional[Type[BaseModel]] = query_params_model
+        self.response_model: Optional[Type[BaseModel]] = response_model
 
     def __call__(self, handler, *args, **kwargs) -> Callable:
         handler_args = getfullargspec(handler).args
@@ -126,16 +120,28 @@ class route:  # pylint: disable=C0103,R0903
 
     def _validate_request(self, request: Request) -> Optional[str]:
         try:
-            if self.body_schema_validator is not None:
-                self.body_schema_validator.validate(request.json)
+            if self.body_model is not None:
+                if isinstance(request.json, list):
+                    self.body_model(request.json)
 
-            if self.query_params_schema_validator is not None:
-                self.query_params_schema_validator.validate(
-                    request.query_params
-                )
+                elif isinstance(request.json, dict):
+                    self.body_model(**request.json)
+                else:
+                    return f"Unexpected body: {json.dumps(request.json)}"
+
+            if self.query_params_model is not None:
+                self.query_params_model(**request.query_params)
 
         except ValidationError as err:
-            return str(err).split("\n", maxsplit=1)[0]
+            first_error = err.errors()[0]
+            first_error_loc = ".".join(
+                [str(loc_elem) for loc_elem in first_error["loc"]]
+            )
+            first_error_message = first_error["msg"]
+
+            error_message = f"{first_error_loc}: {first_error_message}"
+
+            return error_message
 
         return None
 

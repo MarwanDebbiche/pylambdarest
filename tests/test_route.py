@@ -3,6 +3,7 @@ import json
 import pytest
 
 from pylambdarest import route
+from pydantic import BaseModel
 
 
 @pytest.fixture
@@ -43,21 +44,14 @@ def invalid_response_headers_route():
 
 
 @pytest.fixture
-def schema_validation_route():
-    body_schema = {
-        "type": "object",
-        "properties": {"name": {"type": "string"}},
-        "required": ["name"],
-        "additionalProperties": False,
-    }
+def model_validation_route():
+    class BodyModel(BaseModel):
+        name: str
 
-    query_params_schema = {
-        "type": ["object", "null"],
-        "properties": {"test": {"type": "string"}},
-        "additionalProperties": False,
-    }
+    class QueryParamsModel(BaseModel):
+        test: str
 
-    @route(body_schema=body_schema, query_params_schema=query_params_schema)
+    @route(body_model=BodyModel, query_params_model=QueryParamsModel)
     def test_route():
         return 200
 
@@ -117,26 +111,48 @@ def test_event_context(event_context_as_headers_route):
     assert response["headers"] == expected_headers
 
 
-def test_schema_validation(schema_validation_route):
+def test_model_validation(model_validation_route):
     context = {}
 
     event = {"body": json.dumps({"invalid": "schema"})}
-    response = schema_validation_route(event, context)
+    response = model_validation_route(event, context)
     assert response["statusCode"] == 400
 
     event = {
         "body": json.dumps({"name": "Test Name"}),
         "queryStringParameters": {"invalidKey": "test"},
     }
-    response = schema_validation_route(event, context)
+    response = model_validation_route(event, context)
     assert response["statusCode"] == 400
 
     event = {
         "body": json.dumps({"name": "Test Name"}),
         "queryStringParameters": {"test": "test"},
     }
-    response = schema_validation_route(event, context)
+    response = model_validation_route(event, context)
     assert response["statusCode"] == 200
+
+    class BodyModel(BaseModel):
+        name: str
+
+    @route(
+        body_model=list[BodyModel],
+    )
+    def test_route():
+        return 200
+
+    event = {
+        "body": json.dumps([{"name": "Test Name"}, {"name": "Test Name 2"}]),
+    }
+
+    response = test_route(event, context)
+    assert response["statusCode"] == 200
+
+    event = {
+        "body": json.dumps(None),
+    }
+    response = test_route(event, context)
+    assert response["statusCode"] == 400
 
 
 def test_invalid_null_body():
