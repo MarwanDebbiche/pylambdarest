@@ -99,7 +99,7 @@ class route:  # pylint: disable=C0103,R0903
             validation_error = self._validate_request(request)
             if validation_error is not None:
                 return route._format_response(
-                    400, str(validation_error).split("\n")[0]
+                    400, str(validation_error).split("\n", maxsplit=1)[0]
                 )
 
             for arg in handler_args:
@@ -112,9 +112,7 @@ class route:  # pylint: disable=C0103,R0903
                 elif arg == "request":
                     func_args_values["request"] = request
                 else:
-                    raise TypeError(
-                        f"handler got an unexpected argument '{arg}'"
-                    )
+                    raise TypeError(f"handler got an unexpected argument '{arg}'")
 
             res = handler(**func_args_values)
             if not isinstance(res, tuple):
@@ -130,12 +128,10 @@ class route:  # pylint: disable=C0103,R0903
                 self.body_schema_validator.validate(request.json)
 
             if self.query_params_schema_validator is not None:
-                self.query_params_schema_validator.validate(
-                    request.query_params
-                )
+                self.query_params_schema_validator.validate(request.query_params)
 
         except ValidationError as err:
-            return str(err).split("\n")[0]
+            return str(err).split("\n", maxsplit=1)[0]
 
         return None
 
