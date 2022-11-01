@@ -5,9 +5,8 @@ App
 Application object to store the common config.
 
 """
-from typing import Optional, Dict, Any
 from inspect import getfullargspec
-
+from typing import Any, Dict, Optional
 
 import simplejson as json
 from jsonschema.exceptions import ValidationError  # type: ignore
@@ -99,11 +98,11 @@ class App:  # pylint: disable=R0903
                 raise Exception(
                     "Unexpected exception JWT_SECRET should not be None"
                 )
-            JWT_SECRET: str = self.config.JWT_SECRET
+            jwt_secret: str = self.config.JWT_SECRET
 
             payload: dict = jwt.decode(
                 token,
-                JWT_SECRET,
+                jwt_secret,
                 algorithms=[self.config.JWT_ALGORITHM],
             )
         except (
@@ -185,7 +184,8 @@ class App:  # pylint: disable=R0903
         if restricted:
             if self.config.JWT_SECRET is None:
                 raise ValueError(
-                    "Cannot declare route as restricted as no JWT_SECRET was passed in app config"
+                    "Cannot declare route as restricted "
+                    "as no JWT_SECRET was passed in app config"
                 )
 
         body_schema_validator = (

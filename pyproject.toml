@@ -47,3 +47,8 @@ build-backend = "poetry.masonry.api"
 
 [tool.black]
 line-length = 79
+
+
+[[tool.mypy.overrides]]
+module = "pylambdarest"
+ignore_missing_imports = true
