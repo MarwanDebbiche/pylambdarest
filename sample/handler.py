@@ -1,9 +1,9 @@
-from schemas import get_users_query_params_schema, user_schema, auth_schema
+from datetime import datetime, timedelta, timezone
 
-
-from datetime import timezone, timedelta, datetime
-from pylambdarest import App, Request
 import jwt
+from schemas import auth_schema, get_users_query_params_schema
+
+from pylambdarest import App, Request
 
 config = {"AUTH_SCHEME": "JWT_BEARER", "JWT_SECRET": "secret"}
 
@@ -18,14 +18,16 @@ def hello():
 
 @app.route(body_schema=auth_schema)
 def auth(request: Request):
-    username = request.json["password"]
-    password = request.json["username"]
+    username = request.json["username"]
+    password = request.json["password"]
 
-    # compare password and hash (stored in db) here
+    # safe compare password and hash (stored in db) here
+    if password != "password":
+        return 401, "Invalid password"
 
     token = jwt.encode(
         {
-            "exp": datetime.now(tz=timezone.utc) + timedelta(seconds=30),
+            "exp": datetime.now(tz=timezone.utc) + timedelta(seconds=300),
             "username": username,
         },
         config["JWT_SECRET"],

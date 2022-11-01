@@ -149,6 +149,59 @@ def get_users(request):
     return 200, users
 ```
 
+## Authentication
+
+### Using JWT Bearer Token
+
+```python
+from datetime import datetime, timedelta, timezone
+import jwt
+from pylambdarest import App, Request
+
+config = {"AUTH_SCHEME": "JWT_BEARER", "JWT_SECRET": "secret"}
+
+app = App(config=config)
+
+
+auth_schema = {
+    "type": "object",
+    "properties": {"username": {"type": "string"}, "password": {"type": "string"}},
+    "required": ["username", "password"],
+    "additionalProperties": False,
+}
+
+# POST /auth
+
+@app.route(body_schema=auth_schema)
+def auth(request: Request):
+    username = request.json["username"]
+    password = request.json["password"]
+
+    # compare password and hash (stored in db) here
+
+    token = jwt.encode(
+        {
+            "exp": datetime.now(tz=timezone.utc) + timedelta(seconds=300),
+            "username": username,
+        },
+        config["JWT_SECRET"],
+    )
+
+    return 200, {"token": token}
+
+# GET /hello
+
+@app.route(restricted=True)
+def hello(jwt_payload):
+    # This route is protected and a 401 error returned
+    # If the JWT is missing from the Authorization header
+
+    # The JWT payload is available as a 'jwt_payload' argument.
+
+    return 200, {"message": "Hello from Pylambdarest"}
+
+```
+
 ## Example
 
 You can look at the [sample](https://github.com/MarwanDebbiche/pylambdarest/tree/master/sample) for a minimal pylambdarest API.

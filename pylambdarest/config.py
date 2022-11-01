@@ -49,7 +49,8 @@ class AppConfig:  # pylint: disable=R0903
         if self.AUTH_SCHEME == "JWT_BEARER":
             if has_jwt is False:
                 raise ImportError(
-                    "PyJWT should be installed when using JWT_BEARER authentication scheme"
+                    "PyJWT should be installed when using "
+                    "JWT_BEARER authentication scheme"
                 )
             if self.JWT_ALGORITHM is None:
                 self.JWT_ALGORITHM = "HS256"
