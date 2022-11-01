@@ -88,15 +88,22 @@ class App:  # pylint: disable=R0903
         if auth_header is None:
             raise AuthError("Empty Authorization header")
 
-        schema, token = auth_header.split()
+        schema: str = auth_header.split()[0]
+        token: str = auth_header.split()[1]
 
         if schema != "Bearer":
             raise AuthError("Invalid Authorization header for Bearer auth")
 
         try:
-            payload = jwt.decode(
+            if self.config.JWT_SECRET is None:
+                raise Exception(
+                    "Unexpected exception JWT_SECRET should not be None"
+                )
+            JWT_SECRET: str = self.config.JWT_SECRET
+
+            payload: dict = jwt.decode(
                 token,
-                self.config.JWT_SECRET,
+                JWT_SECRET,
                 algorithms=[self.config.JWT_ALGORITHM],
             )
         except (
