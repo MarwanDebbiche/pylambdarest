@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pylambdarest"
-version = "0.3.0-rc.2"
+version = "0.3.0rc1"
 license = "MIT"
 description = "Lightweight framework for building REST API using AWS Lambda + API Gateway"
 authors = ["Marwan Debbiche (Macbook Pro) <marwan.debbiche@gmail.com>"]
