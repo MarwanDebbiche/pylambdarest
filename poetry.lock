@@ -39,7 +39,7 @@ tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy 
 
 [[package]]
 name = "babel"
-version = "2.10.3"
+version = "2.11.0"
 description = "Internationalization utilities"
 category = "dev"
 optional = false
@@ -491,8 +491,8 @@ plugins = ["importlib-metadata"]
 name = "pyjwt"
 version = "2.6.0"
 description = "JSON Web Token implementation in Python"
-category = "main"
-optional = true
+category = "dev"
+optional = false
 python-versions = ">=3.7"
 
 [package.extras]
@@ -566,7 +566,7 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.
 
 [[package]]
 name = "pytz"
-version = "2022.5"
+version = "2022.6"
 description = "World timezone definitions, modern and historical"
 category = "dev"
 optional = false
@@ -806,7 +806,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.2"
-content-hash = "e789396f2dad3ebae0bee274501c4bbe388588d1acc92fad26427851dab14ae1"
+content-hash = "8900c4d13168058fed823fadf10c277b12fe3960129b8133d0b737bffcb65725"
 
 [metadata.files]
 alabaster = [
@@ -822,8 +822,8 @@ attrs = [
     {file = "attrs-22.1.0.tar.gz", hash = "sha256:29adc2665447e5191d0e7c568fde78b21f9672d344281d0c6e1ab085429b22b6"},
 ]
 babel = [
-    {file = "Babel-2.10.3-py3-none-any.whl", hash = "sha256:ff56f4892c1c4bf0d814575ea23471c230d544203c7748e8c68f0089478d48eb"},
-    {file = "Babel-2.10.3.tar.gz", hash = "sha256:7614553711ee97490f732126dc077f8d0ae084ebc6a96e23db1482afabdb2c51"},
+    {file = "Babel-2.11.0-py3-none-any.whl", hash = "sha256:1ad3eca1c885218f6dce2ab67291178944f810a10a9b5f3cb8382a5a232b64fe"},
+    {file = "Babel-2.11.0.tar.gz", hash = "sha256:5ef4b3226b0180dedded4229651c8b0e1a3a6a2837d45a073272f313e4cf97f6"},
 ]
 black = [
     {file = "black-22.10.0-1fixedarch-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:5cc42ca67989e9c3cf859e84c2bf014f6633db63d1cbdf8fdb666dcd9e77e3fa"},
@@ -1164,8 +1164,8 @@ pytest = [
     {file = "pytest-7.2.0.tar.gz", hash = "sha256:c4014eb40e10f11f355ad4e3c2fb2c6c6d1919c73f3b5a433de4708202cade59"},
 ]
 pytz = [
-    {file = "pytz-2022.5-py2.py3-none-any.whl", hash = "sha256:335ab46900b1465e714b4fda4963d87363264eb662aab5e65da039c25f1f5b22"},
-    {file = "pytz-2022.5.tar.gz", hash = "sha256:c4d88f472f54d615e9cd582a5004d1e5f624854a6a27a6211591c251f22a6914"},
+    {file = "pytz-2022.6-py2.py3-none-any.whl", hash = "sha256:222439474e9c98fced559f1709d89e6c9cbf8d79c794ff3eb9f8800064291427"},
+    {file = "pytz-2022.6.tar.gz", hash = "sha256:e89512406b793ca39f5971bc999cc538ce125c0e51c27941bef4568b460095e2"},
 ]
 pyyaml = [
     {file = "PyYAML-6.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:d4db7c7aef085872ef65a8fd7d6d09a14ae91f691dec3e87ee5ee0539d516f53"},

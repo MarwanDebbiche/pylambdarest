@@ -1,9 +1,9 @@
 API Reference
 =============
 
-route
+App
 -----
-.. autoclass:: pylambdarest.route
+.. autoclass:: pylambdarest.app
    :members:
 
 Request
