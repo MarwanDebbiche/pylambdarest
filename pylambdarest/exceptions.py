@@ -1,6 +1,20 @@
+"""
+Exceptions
+----------
+Custom Exceptions used in pylambdarest
+
+"""
+
+
 class ConfigError(Exception):
-    pass
+    """
+    Exception raised on configuration error.
+
+    """
 
 
 class AuthError(Exception):
-    pass
+    """
+    Exception raised on authentication error.
+
+    """

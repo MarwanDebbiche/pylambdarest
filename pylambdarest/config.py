@@ -1,3 +1,12 @@
+# pylint: disable=C0103
+"""
+Config
+------
+Config object passed stored in App.
+
+"""
+
+
 from enum import Enum
 from typing import Optional
 
@@ -5,11 +14,20 @@ from pylambdarest.exceptions import ConfigError
 
 
 class AuthSchemeEnum(Enum):
+    """
+    Enumeration of the availables authentication schemes.
+    """
+
     JWT_BEARER = "JWT_BEARER"
 
 
-class AppConfig:
-    def __init__(
+class AppConfig:  # pylint: disable=R0903
+    """
+    Store the application confifuration.
+
+    """
+
+    def __init__(  # pylint: disable=R0913
         self,
         AUTH_SCHEME: Optional[AuthSchemeEnum] = None,
         JWT_SECRET: Optional[str] = None,
@@ -28,7 +46,7 @@ class AppConfig:
             raise ConfigError(
                 "JWT_SECRET cannot be none if AUTH_SCHEME = 'JWT_BEARER'"
             )
-        elif self.AUTH_SCHEME == "JWT_BEARER":
+        if self.AUTH_SCHEME == "JWT_BEARER":
             if has_jwt is False:
                 raise ImportError(
                     "PyJWT should be installed when using JWT_BEARER authentication scheme"

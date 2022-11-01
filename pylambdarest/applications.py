@@ -1,5 +1,8 @@
 """
 App
+---
+
+Application object to store the common config.
 
 """
 from typing import Optional, Dict, Any
@@ -9,14 +12,13 @@ from inspect import getfullargspec
 import simplejson as json
 from jsonschema.exceptions import ValidationError  # type: ignore
 from jsonschema.validators import Draft7Validator  # type: ignore
-import jwt
 
 try:
     import jwt
 
-    has_jwt = True
+    HAS_JWT = True
 except ImportError:
-    has_jwt = False
+    HAS_JWT = False
 
 
 from pylambdarest.config import AppConfig
@@ -24,10 +26,14 @@ from pylambdarest.exceptions import AuthError
 from pylambdarest.request import Request
 
 
-class App:
+class App:  # pylint: disable=R0903
+    """
+    Pylambdarest Application.
+    """
+
     def __init__(self, config: Optional[dict] = None):
         if config is not None:
-            self.config = AppConfig(**config, has_jwt=has_jwt)
+            self.config = AppConfig(**config, has_jwt=HAS_JWT)
         else:
             self.config = AppConfig()
 
@@ -97,8 +103,8 @@ class App:
             jwt.InvalidSignatureError,
             jwt.DecodeError,
             jwt.ExpiredSignatureError,
-        ):
-            raise AuthError("Unautorized")
+        ) as exc:
+            raise AuthError("Unautorized") from exc
 
         return payload
 
@@ -224,7 +230,7 @@ class App:
                             or (restricted is False)
                         ):
                             raise TypeError(
-                                f"handler got an unexpected argument jwt_payload"
+                                "handler got an unexpected argument jwt_payload"
                             )
                         func_args_values["jwt_payload"] = jwt_payload
                     else:
