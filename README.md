@@ -12,7 +12,7 @@ pylambdarest is a lightweight opinionated framework for building REST API using 
 
 Why another framework ?
 
-When using API Gateway and python Lambda functions, the most common pattern is to have a unique Lambda function triggered by a proxy API Gateway resource. The Lambda then uses a framework like [Flask](https://flask.palletsprojects.com/en/1.1.x/) to do all the routing. In an API Gateway + Lambda context, I feel like **the routing should be handled by API Gateway itself**, then forwarding the request to specific Lambda functions for each resource or endpoint.
+When using API Gateway and python Lambda functions, one common pattern is to have a unique Lambda function triggered by a proxy API Gateway resource. The Lambda then uses a framework like [Flask](https://flask.palletsprojects.com/en/1.1.x/) to do all the routing. In an API Gateway + Lambda context, I feel like **the routing should be handled by API Gateway itself**, then forwarding the request to specific Lambda functions for each resource or endpoint.
 
 ## Features
 
@@ -20,6 +20,7 @@ When using API Gateway and python Lambda functions, the most common pattern is t
 - API Gateway event parsing (including request body and path parameters).
 - Cleaner syntax.
 - Optional body schema and query parameters validation.
+- Optional authentication using JWT Bearet token.
 
 ## Installation
 
@@ -57,9 +58,11 @@ def handler(event, context):
 Into this:
 
 ```python
-from pylambdarest import route
+from pylambdarest import App
 
-@route()
+app = App()
+
+@app.route()
 def handler(request):
     body = request.json
     query_params = request.query_params
@@ -71,9 +74,7 @@ def handler(request):
 You can still access the original `event` and `context` arguments from the handler:
 
 ```python
-from pylambdarest import route
-
-@route()
+@app.route()
 def handler(request, event, context):
     print(event)
     body = request.json
@@ -90,9 +91,7 @@ Path parameters defined in API Gateway can also be accessed directly as function
 ![api-gateway-path-params](https://raw.githubusercontent.com/MarwanDebbiche/pylambdarest/master/images/api-gateway-path-params.png)
 
 ```python
-from pylambdarest import route
-
-@route()
+@app.route()
 def get_user(user_id):
     print(user_id)
 
@@ -107,8 +106,6 @@ def get_user(user_id):
 pylambdarest optionally provides schema validation using [jsonschema](https://github.com/Julian/jsonschema):
 
 ```python
-from pylambdarest import route
-
 user_schema = {
     "type": "object",
     "properties": {
@@ -118,7 +115,7 @@ user_schema = {
     "additionalProperties": False
 }
 
-@route(body_schema=user_schema)
+@app.route(body_schema=user_schema)
 def create_user(request):
     # If the request's body does not
     # satisfy the user_schema,
@@ -139,7 +136,7 @@ query_params_schema = {
     "additionalProperties": False
 }
 
-@route(query_params_schema=query_params_schema)
+@app.route(query_params_schema=query_params_schema)
 def get_users(request):
     page = int(request.query_params.get("page", 1))
 

@@ -3,7 +3,7 @@ API Reference
 
 App
 -----
-.. autoclass:: pylambdarest.app
+.. autoclass:: pylambdarest.App
    :members:
 
 Request
