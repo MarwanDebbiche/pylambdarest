@@ -3,10 +3,15 @@ API Reference
 
 route
 -----
-.. autoclass:: pylambdarest.route
+.. autoclass:: restful_aws_lambda.route
+   :members:
+
+Route
+-----
+.. autoclass:: restful_aws_lambda.route.Route
    :members:
 
 Request
 -------
-.. autoclass:: pylambdarest.request.Request
+.. autoclass:: restful_aws_lambda.request.Request
    :members:

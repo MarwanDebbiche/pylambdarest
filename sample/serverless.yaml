@@ -1,4 +1,4 @@
-service: pylambdarest-sample
+service: restful_aws_lambda-sample
 provider:
   name: aws
   runtime: python3.8

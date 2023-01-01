@@ -1,10 +1,10 @@
 {
-  "name": "pylambdarest-sample",
+  "name": "restful-aws-lambda-sample",
   "version": "1.0.0",
-  "description": "pylambdarest-sample",
+  "description": "restful-aws-lambda-sample",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MarwanDebbiche/pylambdarest.git"
+    "url": "https://github.com/joffreybvn/restful-aws-lambda.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

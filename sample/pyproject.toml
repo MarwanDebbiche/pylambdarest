@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "pylambdarest-sample"
+name = "restful-aws-lambda-sample"
 version = "0.0.1"
-description = "Sample project using pylambdarest"
-authors = ["Marwan Debbiche (Macbook Pro) <marwan.debbiche@gmail.com>"]
+description = "Sample project using restful-aws-lambda"
+authors = ["Joffrey Bienvenu <joffreybvn@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pylambdarest = "^0.2.0"
-# pylambdarest = {path= "./.."} # editable install used for pylambdarest development
+restful_aws_lambda = "^0.1.0"
+# restful_aws_lambda = {path= "./.."} # editable install used for pylambdarest development
 
 
 [build-system]

@@ -1,10 +1,10 @@
 # Sample project
 
-This sample project demonstrates how you can use pylambdarest with [serverless](https://serverless.com/) to build and deploy your own REST API.
+This sample project demonstrates how you can use restful_aws_lambda with [serverless](https://serverless.com/) to build and deploy your own REST API.
 
 The [serverless.yaml](./serverless.yaml) defines the API Gateway routing.
 
-Handlers are defined in [handler.py](./handler.py) using pylambdarest.
+Handlers are defined in [handler.py](./handler.py) using restful_aws_lambda.
 
 # Install js dependencies
 

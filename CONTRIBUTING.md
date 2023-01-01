@@ -1,12 +1,12 @@
-# How to contribute to pylambdarest
+# How to contribute to restful-aws-lambda
 
-Thank you for considering contributing to pylambdarest!
+Thank you for considering contributing to restful-aws-lambda!
 
 ## First time setup
 
 - Make sure you have a [GitHub account](https://github.com/join).
 
-- Fork pylambdarest to your GitHub account by clicking the [Fork](https://github.com/MarwanDebbiche/pylambdarest/fork) button.
+- Fork restful-aws-lambda to your GitHub account by clicking the [Fork](https://github.com/joffreybvn/restful-aws-lambda/fork) button.
 
 - Install [poetry](https://python-poetry.org/).
 
@@ -25,7 +25,7 @@ poetry run pre-commit install --install-hooks
 - Run the tests to make sure you are all set:
 
 ```shell
-poetry run coverage run -m --source=pylambdarest pytest tests && poetry run coverage report -m
+poetry run coverage run -m --source=restful_aws_lambda pytest tests && poetry run coverage report -m
 ```
 
 ## Building the docs

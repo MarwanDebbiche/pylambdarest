@@ -19,7 +19,7 @@ sys.path.insert(0, PROJECT_ROOT_DIR)
 
 # -- Project information -----------------------------------------------------
 
-project = "pylambdarest"
+project = "restful_aws_lambda"
 copyright = "2022, Joffrey Bienvenu"
 author = "Joffrey Bienvenu"
 master_doc = "index"

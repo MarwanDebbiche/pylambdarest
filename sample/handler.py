@@ -3,12 +3,12 @@ from schemas import get_users_query_params_schema, user_schema
 from restful_aws_lambda import route
 
 
-@route()
+@route
 def hello():
-    return 200, {"message": "Hello from pylambdarest !!!"}
+    return 200, {"message": "Hello from restful_aws_lambda !"}
 
 
-@route()
+@route
 def get_user(user_id):
     # request db data for user <user_id> here
     user = {"userId": user_id, "name": "John Doe"}

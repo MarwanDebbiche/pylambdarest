@@ -32,13 +32,13 @@ jobs:
           poetry run flake8 --count --exit-zero --max-complexity=10 --max-line-length=79 --statistics --extend-exclude=node_modules
       - name: Pylint
         run: |
-          poetry run pylint pylambdarest
+          poetry run pylint restful-aws-lambda
       - name: mypy
         run: |
-          poetry run mypy -p pylambdarest
+          poetry run mypy -p restful-aws-lambda
       - name: Pytest
         run: |
-          poetry run coverage run -m --source=pylambdarest pytest tests
+          poetry run coverage run -m --source=restful-aws-lambda pytest tests
           poetry run coverage report
       - name: Coveralls
         run: poetry run coveralls
