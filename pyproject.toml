@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "restful-aws-lambda"
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 description = "Lightweight framework for building REST API using AWS Lambda + API Gateway"
 authors = ["Joffrey Bienvenu <joffreybvn@gmail.com>"]

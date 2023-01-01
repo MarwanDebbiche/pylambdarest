@@ -1,9 +1,9 @@
 # restful-aws-lambda
 
-[![CI/CD Status](https://github.com/joffreybvn/restful-aws-lambda/workflows/CI%2FCD/badge.svg?branch=master)](https://github.com/MarwanDebbiche/pylambdarest/actions?query=branch:master)
-[![Coverage Status](https://coveralls.io/repos/github/joffreybvn/restful-aws-lambda/badge.svg?branch=master)](https://coveralls.io/github/MarwanDebbiche/pylambdarest?branch=master)
-[![Latest Version](https://img.shields.io/pypi/v/restful-aws-lambda.svg?color=blue)](https://pypi.python.org/pypi/pylambdarest)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/restful-aws-lambda?label=pypi%20downloads)](https://pypi.org/project/pylambdarest/)
+[![CI/CD Status](https://github.com/joffreybvn/restful-aws-lambda/workflows/CI%2FCD/badge.svg?branch=master)](https://github.com/joffreybvn/restful-aws-lambda/actions?query=branch:master)
+[![Coverage Status](https://coveralls.io/repos/github/joffreybvn/restful-aws-lambda/badge.svg?branch=master)](https://coveralls.io/github/joffreybvn/restful-aws-lambda?branch=master)
+[![Latest Version](https://img.shields.io/pypi/v/restful-aws-lambda.svg?color=blue)](https://pypi.python.org/pypi/restful-aws-lambda)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/restful-aws-lambda?label=pypi%20downloads)](https://pypi.org/project/restful-aws-lambda/)
 ![License](https://img.shields.io/github/license/joffreybvn/restful-aws-lambda)
 
 restful-aws-lambda is a lightweight opinionated framework for building REST API using [AWS Lambda](https://aws.amazon.com/lambda/) and [API Gateway](https://aws.amazon.com/api-gateway/).
