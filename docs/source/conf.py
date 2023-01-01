@@ -20,8 +20,8 @@ sys.path.insert(0, PROJECT_ROOT_DIR)
 # -- Project information -----------------------------------------------------
 
 project = "pylambdarest"
-copyright = "2020, Marwan Debbiche"
-author = "Marwan Debbiche"
+copyright = "2022, Joffrey Bienvenu"
+author = "Joffrey Bienvenu"
 master_doc = "index"
 
 # -- General configuration ---------------------------------------------------

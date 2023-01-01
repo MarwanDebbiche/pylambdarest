@@ -4,43 +4,26 @@ Route
 API Gateway -> Lambda handler.
 
 """
-
 import json
 from collections.abc import Callable
 from inspect import getfullargspec
 from typing import Any, Dict, Optional
+
 from restful_aws_lambda.request import Request
 
 
 class Route:  # pylint: disable=C0103,R0903
     """
-    Lambda handler decorator.
-
-    The @route decorator automatically format the response
-    from a handler into the expected API Gateway + Lambda format.
-    It also parses API Gateway's events into a Request object
-    available as a "request" argument, and optionally provides
-    body and query string parameters schema validation.
-
-    Examples
-    --------
-    Define a 'hello' handler. A request argument (Request object) can be used
-    in the handler.
-
-    >>> @route()
-    ... def hello(request):
-    ...     name = request.json["name"]
-    ...     return 200, {"message" : f"Hello {name} !"}
-
-    >>> hello({"body": '{"name": "John Doe"}'}, {})
-    {'statusCode': 200, 'body': '{"message": "Hello John Doe !"}'}
+    Lambda handler decorator core class.
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, lambda_handler: Callable, json_dumps_options: dict):
+        self._handler: Callable = lambda_handler
+        self._json_dumps_options: dict = json_dumps_options
 
-    def __call__(self, handler, *args, **kwargs) -> Callable:
-        handler_args = getfullargspec(handler).args
+    def restful(self) -> Callable:
+        """Build and return a restful lambda_handler."""
+        handler_args = getfullargspec(self._handler).args
 
         def inner_func(event, context) -> dict:
 
@@ -61,16 +44,16 @@ class Route:  # pylint: disable=C0103,R0903
                         f"handler got an unexpected argument '{arg}'"
                     )
 
-            response = handler(**func_args_values)
+            response = self._handler(**func_args_values)
             if not isinstance(response, tuple):
-                res = (response,)
+                response = (response,)
 
-            return Route._format_response(*response)
+            return self._format_response(*response)
+
         return inner_func
 
-    @staticmethod
     def _format_response(
-        code: int, body: Any = None, headers: Optional[dict] = None
+        self, code: int, body: Any = None, headers: Optional[dict] = None
     ) -> Dict[str, Any]:
         """
         Format the handler's response to the expected Lambda response format.
@@ -84,7 +67,7 @@ class Route:  # pylint: disable=C0103,R0903
         response: Dict[str, Any] = {"statusCode": code}
 
         if body is not None:
-            response["body"] = json.dumps(body)
+            response["body"] = json.dumps(body, **self._json_dumps_options)
 
         if headers is not None:
             response["headers"] = headers

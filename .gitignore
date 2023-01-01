@@ -133,3 +133,5 @@ dmypy.json
 secrets.txt
 .serverless
 test-api
+
+.idea

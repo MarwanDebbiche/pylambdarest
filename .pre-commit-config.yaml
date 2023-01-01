@@ -7,17 +7,17 @@ repos:
       - id: end-of-file-fixer
       - id: trailing-whitespace
   - repo: https://github.com/psf/black
-    rev: 20.8b1
+    rev: 22.12.0
     hooks:
       - id: black
         args: [--line-length=79]
-        files: ^pylambdarest/
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.8.4
+        files: ^restful_aws_lambda/
+  - repo: https://github.com/PyCQA/flake8
+    rev: 5.0.4
     hooks:
       - id: flake8
   - repo: https://github.com/PyCQA/isort
-    rev: 5.6.4
+    rev: 5.11.4
     hooks:
       - id: isort
   - repo: local
@@ -29,7 +29,7 @@ repos:
         language: system
         types: [python]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.790
+    rev: v0.991
     hooks:
       - id: mypy
         exclude: ^(docs/)
