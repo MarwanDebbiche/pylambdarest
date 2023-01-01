@@ -1,7 +1,7 @@
 # restful-aws-lambda
 
 [![CI/CD Status](https://github.com/joffreybvn/restful-aws-lambda/workflows/CI%2FCD/badge.svg?branch=master)](https://github.com/joffreybvn/restful-aws-lambda/actions?query=branch:master)
-[![Coverage Status](https://coveralls.io/repos/github/joffreybvn/restful-aws-lambda/badge.svg?branch=master)](https://coveralls.io/github/joffreybvn/restful-aws-lambda?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Joffreybvn/restful-aws-lambda/badge.svg?branch=master)](https://coveralls.io/github/Joffreybvn/restful-aws-lambda?branch=master)
 [![Latest Version](https://img.shields.io/pypi/v/restful-aws-lambda.svg?color=blue)](https://pypi.python.org/pypi/restful-aws-lambda)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/restful-aws-lambda?label=pypi%20downloads)](https://pypi.org/project/restful-aws-lambda/)
 ![License](https://img.shields.io/github/license/joffreybvn/restful-aws-lambda)
