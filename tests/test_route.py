@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from pylambdarest import route
+from restful_aws_lambda import route
 
 
 @pytest.fixture

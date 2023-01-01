@@ -1,6 +1,6 @@
 import pytest
 
-from pylambdarest.request import Request
+from restful_aws_lambda.request import Request
 
 
 def event():

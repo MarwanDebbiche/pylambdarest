@@ -1,6 +1,6 @@
 from schemas import get_users_query_params_schema, user_schema
 
-from pylambdarest import route
+from restful_aws_lambda import route
 
 
 @route()

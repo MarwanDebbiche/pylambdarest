@@ -57,7 +57,8 @@ def handler(event, context):
 Into this:
 
 ```python
-from pylambdarest import route
+from restful_aws_lambda import route
+
 
 @route()
 def handler(request):
@@ -71,7 +72,8 @@ def handler(request):
 You can still access the original `event` and `context` arguments from the handler:
 
 ```python
-from pylambdarest import route
+from restful_aws_lambda import route
+
 
 @route()
 def handler(request, event, context):
@@ -90,7 +92,8 @@ Path parameters defined in API Gateway can also be accessed directly as function
 ![api-gateway-path-params](https://raw.githubusercontent.com/MarwanDebbiche/pylambdarest/master/images/api-gateway-path-params.png)
 
 ```python
-from pylambdarest import route
+from restful_aws_lambda import route
+
 
 @route()
 def get_user(user_id):
@@ -107,7 +110,7 @@ def get_user(user_id):
 pylambdarest optionally provides schema validation using [jsonschema](https://github.com/Julian/jsonschema):
 
 ```python
-from pylambdarest import route
+from restful_aws_lambda import route
 
 user_schema = {
     "type": "object",
@@ -117,6 +120,7 @@ user_schema = {
     "required": ["name"],
     "additionalProperties": False
 }
+
 
 @route(body_schema=user_schema)
 def create_user(request):
@@ -138,6 +142,7 @@ query_params_schema = {
     },
     "additionalProperties": False
 }
+
 
 @route(query_params_schema=query_params_schema)
 def get_users(request):
