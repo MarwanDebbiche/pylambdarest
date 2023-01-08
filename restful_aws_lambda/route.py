@@ -4,9 +4,9 @@ Route
 API Gateway -> Lambda handler.
 
 """
+import inspect
 import json
 from collections.abc import Callable
-from inspect import getfullargspec
 from typing import Any, Dict, Optional
 
 from restful_aws_lambda.request import Request
@@ -23,7 +23,8 @@ class Route:  # pylint: disable=C0103,R0903
 
     def restful(self) -> Callable:
         """Build and return a restful lambda_handler."""
-        handler_args = getfullargspec(self._handler).args
+        signature = inspect.signature(self._handler, follow_wrapped=True)
+        handler_args = list(signature.parameters)
 
         def inner_func(event, context) -> dict:
 
