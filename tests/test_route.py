@@ -54,7 +54,6 @@ def event_context_as_headers_route():
 
 @pytest.fixture
 def json_encoder_route():
-
     class JSONDatetimeEncoder(json.JSONEncoder):
         def default(self, obj):
             if isinstance(obj, (datetime.date, datetime.datetime)):
@@ -62,7 +61,7 @@ def json_encoder_route():
 
             return super(JSONDatetimeEncoder, self).default(obj)
 
-    @route(json={'cls': JSONDatetimeEncoder})
+    @route(json={"cls": JSONDatetimeEncoder})
     def test_route():
         response = {"creation_date": datetime.date.today()}
         return 200, response
@@ -128,4 +127,4 @@ def test_json_custom_datetime_encoder_response(json_encoder_route):
     response: dict = json_encoder_route({}, {})
 
     today: str = datetime.date.today().isoformat()
-    assert response['body'] == f'{{"creation_date": "{today}"}}'
+    assert response["body"] == f'{{"creation_date": "{today}"}}'
