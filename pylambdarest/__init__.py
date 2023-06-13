@@ -2,6 +2,7 @@
 pylambdarest - RESTful API with AWS Lambda and API Gateway.
 """
 
-from pylambdarest.route import route
+from pylambdarest.applications import App
+from pylambdarest.request import Request
 
-__all__ = ["route"]
+__all__ = ["App", "Request"]

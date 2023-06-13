@@ -2,12 +2,18 @@ import json
 
 import pytest
 
-from pylambdarest import route
+from pylambdarest import App
 
 
 @pytest.fixture
-def empty_route():
-    @route()
+def app():
+
+    return App()
+
+
+@pytest.fixture
+def empty_route(app):
+    @app.route()
     def test_route():
         return 200
 
@@ -15,8 +21,8 @@ def empty_route():
 
 
 @pytest.fixture
-def get_user_route():
-    @route()
+def get_user_route(app):
+    @app.route()
     def test_route(user_id):
         user = {"id": user_id, "name": "Test User"}
         return 200, user
@@ -25,8 +31,8 @@ def get_user_route():
 
 
 @pytest.fixture
-def invalid_code_route():
-    @route()
+def invalid_code_route(app):
+    @app.route()
     def invalid_code_handler():
         return "code"
 
@@ -34,8 +40,8 @@ def invalid_code_route():
 
 
 @pytest.fixture
-def invalid_response_headers_route():
-    @route()
+def invalid_response_headers_route(app):
+    @app.route()
     def invalid_response_headers_handler():
         return 200, {}, "invalid_headers"
 
@@ -43,7 +49,7 @@ def invalid_response_headers_route():
 
 
 @pytest.fixture
-def schema_validation_route():
+def schema_validation_route(app):
     body_schema = {
         "type": "object",
         "properties": {"name": {"type": "string"}},
@@ -57,7 +63,9 @@ def schema_validation_route():
         "additionalProperties": False,
     }
 
-    @route(body_schema=body_schema, query_params_schema=query_params_schema)
+    @app.route(
+        body_schema=body_schema, query_params_schema=query_params_schema
+    )
     def test_route():
         return 200
 
@@ -65,8 +73,8 @@ def schema_validation_route():
 
 
 @pytest.fixture
-def event_context_as_headers_route():
-    @route()
+def event_context_as_headers_route(app):
+    @app.route()
     def test_route(event, context):
         return 200, {}, {"event": event, "context": context}
 
@@ -139,8 +147,8 @@ def test_schema_validation(schema_validation_route):
     assert response["statusCode"] == 200
 
 
-def test_invalid_null_body():
-    @route()
+def test_invalid_null_body(app):
+    @app.route()
     def empty_route(request):
         assert request.body is None
         assert request.json is None

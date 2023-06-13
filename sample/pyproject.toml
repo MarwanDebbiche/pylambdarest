@@ -6,8 +6,8 @@ authors = ["Marwan Debbiche (Macbook Pro) <marwan.debbiche@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pylambdarest = "^0.2.0"
-# pylambdarest = {path= "./.."} # editable install used for pylambdarest development
+# pylambdarest = "^0.2.0"
+pylambdarest = {path= "./..", develop = true}
 
 
 [build-system]

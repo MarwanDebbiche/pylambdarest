@@ -9,10 +9,10 @@ functions:
     handler: handler.hello
     events:
       - http: GET /hello
-  createUser:
-    handler: handler.create_user
+  auth:
+    handler: handler.auth
     events:
-      - http: POST /users
+      - http: POST /auth
   getUser:
     handler: handler.get_user
     events:
