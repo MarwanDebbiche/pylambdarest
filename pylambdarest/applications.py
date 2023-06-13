@@ -74,7 +74,8 @@ class App:  # pylint: disable=R0903
 
         if self.config.ALLOW_CORS:
             response["headers"] = {
-                "Access-Control-Allow-Origin": self.config.CORS_ORIGIN
+                "Access-Control-Allow-Origin": self.config.CORS_ORIGIN,
+                "Access-Control-Allow-Credentials": self.config.CORS_ALLOW_CREDENTIALS,
             }
 
         if headers is not None:

@@ -34,6 +34,7 @@ class AppConfig:  # pylint: disable=R0903
         JWT_ALGORITHM: Optional[str] = None,
         ALLOW_CORS: bool = False,
         CORS_ORIGIN: Optional[str] = None,
+        CORS_ALLOW_CREDENTIALS: Optional[bool] = None,
         has_jwt: Optional[bool] = None,
     ) -> None:
         self.AUTH_SCHEME: Optional[AuthSchemeEnum] = AUTH_SCHEME
@@ -41,6 +42,7 @@ class AppConfig:  # pylint: disable=R0903
         self.JWT_ALGORITHM: Optional[str] = JWT_ALGORITHM
         self.ALLOW_CORS: bool = ALLOW_CORS
         self.CORS_ORIGIN: Optional[str] = CORS_ORIGIN
+        self.CORS_ALLOW_CREDENTIALS: Optional[bool] = CORS_ALLOW_CREDENTIALS
 
         if (self.AUTH_SCHEME == "JWT_BEARER") and (self.JWT_SECRET is None):
             raise ConfigError(
@@ -60,3 +62,6 @@ class AppConfig:  # pylint: disable=R0903
                 "CORS_ORIGIN cannot be none if ALLOW_CORS is True. "
                 "To allow all origins, set CORS_ORIGIN to '*'"
             )
+
+        if self.ALLOW_CORS and self.CORS_ALLOW_CREDENTIALS is None:
+            self.CORS_ALLOW_CREDENTIALS = False
