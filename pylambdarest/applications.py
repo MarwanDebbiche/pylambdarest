@@ -55,13 +55,16 @@ class App:  # pylint: disable=R0903
         return None
 
     def _format_response(
-        self, code: int, body: Any = None, headers: Optional[dict] = None
+        self,
+        request: Request,
+        code: int,
+        body: Any = None,
+        headers: Optional[dict] = None,
     ) -> Dict[str, Any]:
         """
         Format the handler's response to the expected Lambda response format.
         """
         if not isinstance(code, int):
-            print(code, body, headers)
             raise TypeError(f"Invalid status code. {type(code)} is not int.")
         if type(headers) not in [type(None), dict]:
             raise TypeError(
@@ -73,8 +76,16 @@ class App:  # pylint: disable=R0903
             response["body"] = json.dumps(body)
 
         if self.config.ALLOW_CORS:
+            if isinstance(self.config.CORS_ORIGIN, list):
+                origin = request.headers.get("Origin") or request.headers.get(
+                    "origin"
+                )
+                if origin not in self.config.CORS_ORIGIN:
+                    origin = self.config.CORS_ORIGIN[0]
+            else:
+                origin = self.config.CORS_ORIGIN
             response["headers"] = {
-                "Access-Control-Allow-Origin": self.config.CORS_ORIGIN,
+                "Access-Control-Allow-Origin": origin,
                 "Access-Control-Allow-Credentials": self.config.CORS_ALLOW_CREDENTIALS,
             }
 
@@ -210,7 +221,9 @@ class App:  # pylint: disable=R0903
                     try:
                         jwt_payload = self._check_jwt_bearer(request)
                     except AuthError:
-                        return self._format_response(401, "Unauthorized")
+                        return self._format_response(
+                            request, 401, "Unauthorized"
+                        )
 
                 validation_error = App._validate_request(
                     request,
@@ -219,7 +232,9 @@ class App:  # pylint: disable=R0903
                 )
                 if validation_error is not None:
                     return self._format_response(
-                        400, str(validation_error).split("\n", maxsplit=1)[0]
+                        request,
+                        400,
+                        str(validation_error).split("\n", maxsplit=1)[0],
                     )
 
                 for arg in handler_args:
@@ -250,7 +265,7 @@ class App:  # pylint: disable=R0903
                 if not isinstance(res, tuple):
                     res = (res,)
 
-                return self._format_response(*res)
+                return self._format_response(request, *res)
 
             return wrapper
 

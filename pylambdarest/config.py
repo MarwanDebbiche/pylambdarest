@@ -8,7 +8,7 @@ Config object passed stored in App.
 
 
 from enum import Enum
-from typing import Optional
+from typing import List, Optional, Union
 
 from pylambdarest.exceptions import ConfigError
 
@@ -33,7 +33,7 @@ class AppConfig:  # pylint: disable=R0903
         JWT_SECRET: Optional[str] = None,
         JWT_ALGORITHM: Optional[str] = None,
         ALLOW_CORS: bool = False,
-        CORS_ORIGIN: Optional[str] = None,
+        CORS_ORIGIN: Optional[Union[str, List[str]]] = None,
         CORS_ALLOW_CREDENTIALS: Optional[bool] = None,
         has_jwt: Optional[bool] = None,
     ) -> None:
@@ -41,7 +41,7 @@ class AppConfig:  # pylint: disable=R0903
         self.JWT_SECRET: Optional[str] = JWT_SECRET
         self.JWT_ALGORITHM: Optional[str] = JWT_ALGORITHM
         self.ALLOW_CORS: bool = ALLOW_CORS
-        self.CORS_ORIGIN: Optional[str] = CORS_ORIGIN
+        self.CORS_ORIGIN: Optional[Union[str, List[str]]] = CORS_ORIGIN
         self.CORS_ALLOW_CREDENTIALS: Optional[bool] = CORS_ALLOW_CREDENTIALS
 
         if (self.AUTH_SCHEME == "JWT_BEARER") and (self.JWT_SECRET is None):
